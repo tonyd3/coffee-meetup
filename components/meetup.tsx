@@ -425,15 +425,19 @@ export function Meetup({ initialDate }: { initialDate: string }) {
               >
                 <div className="meeting-diagram" aria-hidden="true">
                   <svg viewBox="0 0 300 150" fill="none">
-                    <circle cx="105" cy="75" r="63" />
-                    <circle cx="195" cy="75" r="63" />
-                    <path d="M62 75h176" strokeDasharray="2 5" />
-                    <circle className="diagram-person" cx="62" cy="75" r="4" />
-                    <circle className="diagram-person" cx="238" cy="75" r="4" />
+                    <circle cx="90" cy="75" r="70" />
+                    <circle cx="210" cy="75" r="70" />
+                    <path d="M90 75h120" strokeDasharray="2 5" />
+                    <circle className="diagram-person" cx="90" cy="75" r="4" />
+                    <circle className="diagram-person" cx="210" cy="75" r="4" />
                     <circle className="diagram-centre" cx="150" cy="75" r="6" />
+                    <text className="diagram-label" x="90" y="108">
+                      You
+                    </text>
+                    <text className="diagram-label" x="210" y="108">
+                      Them
+                    </text>
                   </svg>
-                  <span>You</span>
-                  <span>Them</span>
                 </div>
                 <h3>
                   {loading ? (

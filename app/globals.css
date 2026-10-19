@@ -525,7 +525,6 @@ input::-webkit-calendar-picker-indicator:hover {
 .meeting-diagram {
   width: 270px;
   max-width: 100%;
-  position: relative;
   margin-bottom: 28px;
 }
 .meeting-diagram svg {
@@ -542,19 +541,12 @@ input::-webkit-calendar-picker-indicator:hover {
   fill: var(--bg);
   stroke: var(--muted);
 }
-.meeting-diagram > span {
-  position: absolute;
-  top: 50%;
-  margin-top: 16px;
-  font-size: 9px;
+.meeting-diagram .diagram-label {
+  fill: var(--muted);
+  stroke: none;
+  text-anchor: middle;
+  font-size: 15px;
   letter-spacing: 0.04em;
-  color: var(--muted);
-}
-.meeting-diagram > span:nth-child(2) {
-  left: 17%;
-}
-.meeting-diagram > span:nth-child(3) {
-  right: 15%;
 }
 .empty-state h3 {
   font-family: var(--font-serif), serif;
