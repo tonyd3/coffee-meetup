@@ -5,22 +5,46 @@ const daily = (open: string, close: string): Hours[] =>
 const checked = "2026-10-19";
 const saintFrank = "https://www.saintfrankcoffee.com/pages/our-locations";
 const sightglass = "https://sightglasscoffee.com/pages/our-cafes";
-const movement = "https://www.thecoffeemovement.com/";
 const sightglassHours = () =>
   daily("06:30", "17:00").map((h, day) =>
     day === 0 || day === 6 ? { ...h, open: "07:00" } : h,
   );
-const movementHours = () =>
-  daily("07:00", "14:00").map((h, day) =>
-    day === 0 || day === 6 ? { ...h, close: "16:00" } : h,
-  );
 
-// Starter shortlist, not Tony's personal endorsements. Replace or extend this array.
-// Hours come from the linked official sites; coordinates from OpenStreetMap via Photon.
+// SF whitelist: all public city cafés listed by Verve, Saint Frank and Ritual,
+// plus the retained Sightglass locations. Hours come from the official sources.
+// Coordinates are OSM/Photon points, except FiDi's official linked Google Maps pin.
 export const cafes: Cafe[] = [
   {
+    id: "ritual-fidi",
+    name: "Ritual · FiDi",
+    neighbourhood: "Financial District",
+    address: "259 California Street",
+    lat: 37.7929686,
+    lon: -122.3995136,
+    note: "Ritual's new café in the 255 California building.",
+    hours: Array.from({ length: 7 }, () => null),
+    dateHours: { "2026-10-22": { open: "08:00", close: "15:00" } },
+    hoursNote: "Opening day: 22 Oct, 8am–3pm; regular hours unconfirmed.",
+    source: "https://ritualcoffee.com/location/fidi/",
+    checked,
+  },
+  {
+    id: "ritual-hayes",
+    name: "Ritual · Hayes Valley",
+    neighbourhood: "Hayes Valley",
+    address: "432B Octavia Street",
+    lat: 37.7763922,
+    lon: -122.424172,
+    note: "The Ritual coffee bar at PROXY, beside Patricia's Green.",
+    hours: daily("07:00", "15:30").map((h, day) =>
+      day === 0 || day === 6 ? { ...h, close: "17:00" } : h,
+    ),
+    source: "https://ritualcoffee.com/locations/",
+    checked,
+  },
+  {
     id: "ritual-valencia",
-    name: "Ritual Coffee",
+    name: "Ritual · Valencia",
     neighbourhood: "Mission",
     address: "1026 Valencia Street",
     lat: 37.7564325,
@@ -93,27 +117,17 @@ export const cafes: Cafe[] = [
     checked,
   },
   {
-    id: "movement-chinatown",
-    name: "The Coffee Movement · Chinatown",
-    neighbourhood: "Chinatown",
-    address: "1030 Washington Street",
-    lat: 37.7947543,
-    lon: -122.4103018,
-    note: "A small coffee bar on Washington Street. Check seating if you plan to stay.",
-    hours: movementHours(),
-    source: movement,
-    checked,
-  },
-  {
-    id: "movement-richmond",
-    name: "The Coffee Movement · Richmond",
-    neighbourhood: "Inner Richmond",
-    address: "1737 Balboa Street",
-    lat: 37.7764869,
-    lon: -122.477665,
-    note: "The Coffee Movement's Balboa Street location.",
-    hours: movementHours(),
-    source: movement,
+    id: "verve-market",
+    name: "Verve · Market Street",
+    neighbourhood: "Duboce Triangle",
+    address: "2101 Market Street",
+    lat: 37.7670978,
+    lon: -122.4291409,
+    note: "Verve's San Francisco café on Market Street.",
+    hours: daily("06:30", "17:00").map((h, day) =>
+      day === 0 || day === 6 ? { open: "07:00", close: "17:30" } : h,
+    ),
+    source: "https://www.vervecoffee.com/pages/locations",
     checked,
   },
 ];

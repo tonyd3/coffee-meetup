@@ -11,8 +11,22 @@ import {
   sfToday,
 } from "../lib/meeting";
 import { calendarICS, googleCalendar } from "../lib/calendar";
-import type { RouteData } from "../lib/types";
-const cafe = cafes.find((c) => c.id === "movement-chinatown")!;
+import type { Cafe, RouteData } from "../lib/types";
+const cafe: Cafe = {
+  id: "fixture-cafe",
+  name: "Test Café",
+  neighbourhood: "Test neighbourhood",
+  address: "1 Test Street",
+  lat: 37.794,
+  lon: -122.41,
+  note: "",
+  hours: Array.from({ length: 7 }, (_, day) => ({
+    open: "07:00",
+    close: day === 0 || day === 6 ? "16:00" : "14:00",
+  })),
+  source: "https://example.com",
+  checked: "2026-10-19",
+};
 const monday = "2026-10-26",
   saturday = "2026-10-24";
 
@@ -41,7 +55,7 @@ test("exactly 30 minutes qualifies, 29 does not, and calendar duration fits clos
   );
 });
 test("balance changes ranking; equal balance minimises the longest walk", () => {
-  const list = cafes.slice(0, 3);
+  const list = [0, 1, 2].map((i) => ({ ...cafe, id: `fixture-${i}` }));
   const routes: RouteData = {
     estimated: false,
     walks: list.map((c, i) => ({
@@ -130,4 +144,28 @@ test("coordinates reject invalid inputs and straight-line fallback is finite", (
   ])
     assert.equal(isSF(point), false);
   assert.ok(estimatedWalk({ lat: 37.78, lon: -122.42 }, cafe) > 0);
+});
+test("Ritual FiDi is only recommended during its confirmed opening-day hours", () => {
+  const fidi = cafes.find((c) => c.id === "ritual-fidi")!;
+  const routes: RouteData = {
+    estimated: false,
+    walks: [{ cafeId: fidi.id, you: 5, them: 10 }],
+  };
+  assert.equal(availableMinutes(fidi, "2026-10-21", "10:00"), 0);
+  assert.equal(availableMinutes(fidi, "2026-10-22", "07:59"), 0);
+  assert.equal(availableMinutes(fidi, "2026-10-22", "08:00"), 420);
+  assert.equal(
+    recommendations([fidi], routes, "2026-10-22", "14:30", 2)[0].duration,
+    30,
+  );
+  assert.deepEqual(
+    recommendations([fidi], routes, "2026-10-22", "14:31", 2),
+    [],
+  );
+  assert.equal(availableMinutes(fidi, "2026-10-23", "10:00"), 0);
+});
+test("a date-specific closure overrides regular weekly hours", () => {
+  const closed = { ...cafe, dateHours: { [monday]: null } };
+  assert.equal(availableMinutes(closed, monday, "13:30"), 0);
+  assert.equal(availableMinutes(closed, "2026-10-27", "13:30"), 30);
 });

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { calendarICS, googleCalendar } from "@/lib/calendar";
-import { dayOfWeek, timeLabel } from "@/lib/meeting";
+import { openingHours, timeLabel } from "@/lib/meeting";
 import type { Recommendation } from "@/lib/types";
 import { Reveal } from "./motion";
 
@@ -20,7 +20,7 @@ export function CafeResult({
   estimated: boolean;
 }) {
   const [calendarOpen, setCalendarOpen] = useState(false);
-  const hours = result.cafe.hours[dayOfWeek(date)]!;
+  const hours = openingHours(result.cafe, date)!;
   function download() {
     const url = URL.createObjectURL(
       new Blob([calendarICS(result, date, time)], {
@@ -123,7 +123,10 @@ export function CafeResult({
         </Reveal>
       </div>
       <p className="hours-note">
-        Regular hours ·{" "}
+        {Object.hasOwn(result.cafe.dateHours ?? {}, date)
+          ? "Hours for this date"
+          : "Regular hours"}{" "}
+        ·{" "}
         <a href={result.cafe.source} target="_blank" rel="noreferrer">
           Check holiday hours ↗
         </a>

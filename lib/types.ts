@@ -7,7 +7,9 @@ export type Cafe = Coordinates & {
   neighbourhood: string;
   address: string;
   note: string;
-  hours: (Hours | null)[]; // Sunday first; null means closed.
+  hours: (Hours | null)[]; // Sunday first; null means no confirmed opening hours.
+  dateHours?: Record<string, Hours | null>;
+  hoursNote?: string;
   source: string;
   checked: string;
 };

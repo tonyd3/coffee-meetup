@@ -42,12 +42,17 @@ export function nextDay(date: string, kind: "weekday" | "weekend"): string {
   }
   return candidate;
 }
+export function openingHours(cafe: Cafe, date: string) {
+  return cafe.dateHours && Object.hasOwn(cafe.dateHours, date)
+    ? cafe.dateHours[date]
+    : cafe.hours[dayOfWeek(date)];
+}
 export function availableMinutes(
   cafe: Cafe,
   date: string,
   time: string,
 ): number {
-  const hours = cafe.hours[dayOfWeek(date)];
+  const hours = openingHours(cafe, date);
   if (!hours) return 0;
   const start = minutes(time);
   return start < minutes(hours.open) || start >= minutes(hours.close)

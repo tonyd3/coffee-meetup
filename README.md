@@ -32,9 +32,9 @@ npm start
 
 ## Your café list
 
-Edit **`data/cafes.ts`** to replace the starter selection with your own recommendations. Each café has a stable ID, coordinates, address, note, official hours source, last-checked date, and seven daily schedules in **Sunday-first order**. Use `null` for a closed day. The first version supports same-day opening intervals, rather than overnight hours or split shifts.
+Edit **`data/cafes.ts`** to maintain the whitelist. Each café has a stable ID, coordinates, address, note, official hours source, last-checked date, and seven daily schedules in **Sunday-first order**. Use `null` when a day has no confirmed opening hours. Optional `dateHours` entries override the weekly schedule for an exact `YYYY-MM-DD` date, including `null` for a date-specific closure. The first version supports same-day opening intervals, rather than overnight hours or split shifts.
 
-The eight initial locations are a starter selection, not personal endorsements. Regular hours were checked against the linked official sites on **19 October 2026**. Holiday hours, special closures, and seating availability need confirmation with the café. Every recommendation links to its official hours source.
+The whitelist includes every public San Francisco city café currently listed by Verve (1), Saint Frank (3), and Ritual (3), plus the two retained Sightglass locations. The Coffee Movement has been removed. Ritual FiDi opens on **22 October 2026**; only its confirmed opening-day hours (8am–3pm) are eligible until its regular schedule is published. Airport cafés, out-of-city locations, and the Ritual roastery closed to the public are excluded. Hours were checked against the linked official sites on **19 October 2026**. Holiday hours, special closures, and seating availability need confirmation with the café. Every recommendation links to its official hours source.
 
 Visitors can exclude places in the expandable shortlist. Those preferences are saved in their browser's local storage; origins and meeting details are not saved by the app.
 

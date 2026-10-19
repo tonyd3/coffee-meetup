@@ -48,3 +48,13 @@ The desktop layout now places the origins side by side, reduces header and secti
 Verified the initial screen, recommendation, closing warning, calendar choices, and shortlist. At 1066 × 600, the page height stayed at 600 and the closing-warning footer ended at 583px. At 1280 × 720, the page height stayed at 720. At 1440 × 900, the page height stayed at 900 and the footer ended at 797px. Both expanded panels remained inside the viewport, and café inclusion controls worked.
 
 The production build (including TypeScript) and CSS formatting checks passed. Before/after screenshots are retained under `/tmp/coffee-meetup-compact/`; initial baseline capture used 120% browser zoom while later capture used 100%, so these are visual references rather than pixel-matched comparisons. The viewport-fit claims above come from live DOM measurements. No pull request or screenshot uploads were created.
+
+## Café whitelist follow-up
+
+Updated the shortlist to every public SF city location listed by Verve (1), Saint Frank (3), and Ritual (3), retaining the two Sightglass cafés and removing both Coffee Movement locations. Official location pages and hours were checked on 19 October 2026. Airport locations, cafés outside San Francisco, and the Ritual roastery closed to the public are excluded.
+
+Ritual FiDi opens on 22 October. Its official page confirms 8am–3pm for that date but does not publish a regular schedule. Date-specific hours keep it eligible only on that opening day, including the existing 30-minute minimum and closing-time calendar limit. The shortlist explains that its regular hours are unconfirmed.
+
+`npm run typecheck`, all 13 tests, and `npm run build` passed. New tests cover FiDi's opening-day window, the exact 30-minute cutoff, and a date-specific closure overriding regular hours. A data check confirmed nine unique café IDs, seven-day schedules, SF coordinates, the expected brand counts, and no Coffee Movement entries.
+
+A fresh visual check was unavailable: browser automation rejected access to the existing tabs under its URL policy. No new after screenshot is claimed; the previously verified compact layout remains the visual baseline.

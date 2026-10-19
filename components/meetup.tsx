@@ -472,8 +472,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
           <span>
             <span id="shortlist-title">The café shortlist</span>
             <small>
-              {activeCount} {activeCount === 1 ? "place" : "places"} · Starter
-              selection
+              {activeCount} {activeCount === 1 ? "place" : "places"}
             </small>
           </span>
           <span aria-hidden="true">{shortlistOpen ? "−" : "+"}</span>
@@ -498,6 +497,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
                       <small>
                         {cafe.neighbourhood} · {cafe.address}
                       </small>
+                      {cafe.hoursNote && <small>{cafe.hoursNote}</small>}
                     </span>
                   </label>
                   <a
