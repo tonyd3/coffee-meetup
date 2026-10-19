@@ -13,8 +13,8 @@ const sightglassHours = () =>
   );
 
 // Tony's SF whitelist, including all public city cafés from Verve, Saint Frank
-// and Ritual. Hours come from the linked sources; Blue Bottle uses a current
-// business listing because its official hours feed is inconsistent.
+// and Ritual. Hours come from the linked sources; Blue Bottle and Capital One
+// use current business listings where official hours could not be verified.
 // Coordinates use OpenStreetMap, FiDi's official Google Maps pin, and an ArcGIS
 // street-address match for Painted Leopard's Maiden Lane entrance.
 export const cafes: Cafe[] = [
@@ -44,6 +44,21 @@ export const cafes: Cafe[] = [
     hoursNote: "Hours from current business listings; confirm with the café.",
     source:
       "https://www.restaurantji.com/ca/san-francisco/blue-bottle-coffee-8/",
+    checked,
+  },
+  {
+    id: "capital-one-union-square",
+    name: "Capital One Café · Union Square",
+    neighbourhood: "Union Square",
+    address: "101 Post Street",
+    lat: 37.7887697,
+    lon: -122.403832,
+    note: "Verve coffee at the Union Square Capital One Café, open to everyone.",
+    hours: daily("07:00", "18:00").map((h, day) =>
+      day === 0 || day === 6 ? { open: "09:00", close: "17:00" } : h,
+    ),
+    hoursNote: "Serves Verve coffee. Hours from current business listings.",
+    source: "https://sf.eater.com/venue/934882/capital-one-cafe",
     checked,
   },
   {
