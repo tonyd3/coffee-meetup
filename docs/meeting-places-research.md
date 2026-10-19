@@ -58,6 +58,14 @@ SPRO's [official ordering selector](https://www.sprocoffeelab.com/s/order) lists
 
 Mission Bay listings disagree on weekday closing (2pm versus 3pm), so the earlier window is used and flagged. Golden Gate's older recruitment listing advertises a later closing time; current business listings agree on 4pm, which is used conservatively. Online pickup cutoffs were not treated as café closing times. SPARK's 29 October closure overrides Mission Bay's regular Thursday schedule.
 
-The newer **SPRO · Spear Street**, 201 Spear Street, appears in the official location-page data and in [recent reports](https://www.corner.inc/place/pU5KgZBMiSf2), but a complete weekly schedule was not verified. It is held out until its hours can be confirmed.
+The newer **SPRO · Spear Street** was initially held pending hours; it is added in the follow-up below.
 
 All four added coordinates are ArcGIS PointAddress matches with score 100. Address responses and the official source HTML are retained under `/tmp/coffee-meetup-spro/`. All 29 previous café records remain unchanged.
+
+## SPRO Spear Street follow-up — 19 October 2026
+
+Added **SPRO · Spear Street**, 201 Spear Street in the East Cut, bringing the whitelist to 34. The café has indoor seating, documented by its [millwork contractor](https://coffeycustombuilds.com/spro), and the owner describes the café in a [Sprudge interview](https://sprudge.com/build-outs-of-coffee-spro-coffee-lab-in-san-francisco-ca-1161900.html).
+
+The [East Cut's listing](https://www.theeastcut.org/retail-space/spro-coffee-lab/) publishes a 7am opening with a 7pm soft-opening closing time. [Corner](https://www.corner.inc/place/pU5KgZBMiSf2) instead lists Thursday 7am–6pm. Tony confirmed **6pm closing** in this conversation. The app uses **Mon–Fri 7am–6pm**, with the closing time overriding the older East Cut listing. Neither source establishes a complete day-by-day schedule, so weekday availability is provisional and weekend recommendations are excluded pending confirmation. The shortlist flags the unconfirmed weekend hours.
+
+Coordinates are an ArcGIS PointAddress match with score 100 at 37.791185098603, -122.391790935021. The address response is retained at `/tmp/coffee-meetup-spear/coordinates.json`. All 33 previous café records remain unchanged.
