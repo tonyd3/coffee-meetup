@@ -15,8 +15,8 @@ const sightglassHours = () =>
 // Tony's SF whitelist, including all public city cafés from Verve, Saint Frank
 // and Ritual. Hours come from the linked sources; Blue Bottle and Capital One
 // use current business listings where official hours could not be verified.
-// Coordinates use OpenStreetMap, FiDi's official Google Maps pin, and an ArcGIS
-// street-address match for Painted Leopard's Maiden Lane entrance.
+// Coordinates use OpenStreetMap, FiDi's official Google Maps pin, and ArcGIS
+// street-address matches for Painted Leopard, Andytown Kearny, and Equator SoMa.
 export const cafes: Cafe[] = [
   {
     id: "andytown-front",
@@ -27,6 +27,18 @@ export const cafes: Cafe[] = [
     lon: -122.3998778,
     note: "Andytown's downtown kiosk beside Sydney Walton Square.",
     hours: weekdays("07:00", "16:00"),
+    source: "https://andytownsf.com/pages/locations",
+    checked,
+  },
+  {
+    id: "andytown-kearny",
+    name: "Andytown · Kearny Street",
+    neighbourhood: "Financial District",
+    address: "66 Kearny Street",
+    lat: 37.788447988121,
+    lon: -122.403428034113,
+    note: "Andytown's downtown flagship on Kearny Street.",
+    hours: weekdays("07:00", "17:00"),
     source: "https://andytownsf.com/pages/locations",
     checked,
   },
@@ -73,6 +85,19 @@ export const cafes: Cafe[] = [
       h && [1, 5].includes(day) ? { ...h, close: "14:00" } : h,
     ),
     source: "https://centocoffee.com/pages/locations",
+    checked,
+  },
+  {
+    id: "equator-soma",
+    name: "Equator · SoMa",
+    neighbourhood: "SoMa",
+    address: "222 2nd Street",
+    lat: 37.786319822905,
+    lon: -122.39823510982,
+    note: "Equator's café in the LinkedIn lobby, with spacious seating.",
+    hours: weekdays("08:00", "15:30").map((h, day) => (day === 1 ? null : h)),
+    hoursNote: "Saturday hours unconfirmed.",
+    source: "https://www.equatorcoffees.com/pages/soma",
     checked,
   },
   {

@@ -96,3 +96,11 @@ Removed repeated taglines, empty-state explanations, slider paragraphs, the post
 Opening-hour filtering, the 30-minute minimum, closing-soon warnings, estimated-route labels, San Francisco time, source links, and calendar actions remain. Formatting, type checking, and the production build passed. Server-rendered checks covered the initial page, all five slider values and their accessible description, a regular result, the 30-minute closing warning, and the routing fallback. HTML snapshots are retained under `/tmp/coffee-meetup-copy/`; these are source-render checks rather than browser screenshots.
 
 Reviewed the source diff and the earlier full-page screenshots as layout references. Fresh visual and viewport-fit checks remain unavailable under the existing browser URL-policy restriction, so no new matched screenshot pair is claimed.
+
+## Andytown Kearny and Equator SoMa follow-up
+
+Added Andytown at 66 Kearny Street and Equator SoMa at 222 2nd Street, bringing the shortlist to 19 unique cafés in alphabetical order. [Andytown's official directory](https://andytownsf.com/pages/locations), checked 19 October 2026, lists Kearny as Monday–Friday 7am–5pm, closed on weekends. [Equator's official SoMa page](https://www.equatorcoffees.com/pages/soma) lists Tuesday–Friday 8am–3:30pm and Monday/Sunday closed. Its per-day Saturday entry says closed, while the grouped hours say Tuesday–Saturday; only the unambiguous Tuesday–Friday hours are eligible, and the shortlist flags Saturday hours as unconfirmed. Other business listings publish different hours, so the official per-day schedule takes precedence.
+
+Both coordinates are exact ArcGIS PointAddress matches with score 100; Equator's address also matches the LinkedIn building in OpenStreetMap/Photon. Type checking, all 13 tests, formatting, and the production build passed. Targeted data checks verified the count, ordering, unique IDs, seven-day schedules, SF coordinates, opening boundaries, excluded days, and the exact 30-minute closing cutoff for both additions. The running routing endpoint returned HTTP 200 with all 19 cafés and real pedestrian times for both new entries (`estimated: false`); its response is retained at `/tmp/coffee-meetup-routing-19.json`.
+
+This follow-up changes café data only. Fresh browser screenshots remain unavailable under the previously recorded access restriction.
