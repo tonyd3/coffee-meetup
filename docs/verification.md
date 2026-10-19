@@ -58,3 +58,13 @@ Ritual FiDi opens on 22 October. Its official page confirms 8am–3pm for that d
 `npm run typecheck`, all 13 tests, and `npm run build` passed. New tests cover FiDi's opening-day window, the exact 30-minute cutoff, and a date-specific closure overriding regular hours. A data check confirmed nine unique café IDs, seven-day schedules, SF coordinates, the expected brand counts, and no Coffee Movement entries.
 
 A fresh visual check was unavailable: browser automation rejected access to the existing tabs under its URL policy. No new after screenshot is claimed; the previously verified compact layout remains the visual baseline.
+
+## Personal meetup locations follow-up
+
+Added Andytown at 747 Front, Blue Bottle at 115 Sansome, Cento at 140 Sutter, Flywheel at 22 Battery, Loveski at 499 Jackson, and Paper Son at 303 2nd (N102). Saint Frank Mira at 120 Folsom was already present and retains its existing ID. There are now 15 unique cafés in alphabetical order. The supplied meetup counts and historical dates are background context, with no change to recommendation ranking.
+
+Sources checked on 19 October 2026: [Andytown](https://andytownsf.com/pages/locations), [Cento](https://centocoffee.com/pages/locations), [Flywheel](https://flywheelcoffee.com/), [Loveski](https://www.loveskideli.com/location/san-francisco/), and [Paper Son](https://papersoncoffee.com/faq). Blue Bottle's official site returned contradictory schedules (including all days closed and a shifted weekday list); its weekday 6:30am–5:30pm / weekend 8am–2pm schedule uses [Restaurantji](https://www.restaurantji.com/ca/san-francisco/blue-bottle-coffee-8/), corroborated by Restaurant Guru and Wanderlog, with a visible confirmation note. Coordinates matched exact address POIs through OpenStreetMap/Photon, with Andytown's exact street number resolved through Nominatim and cross-checked against ArcGIS after Photon returned unrelated addresses.
+
+Type checking, all 13 tests, formatting, and the production build passed. A targeted data check verified all six additions qualify at 30 minutes before closing and fail at 29, the three weekday-only cafés are excluded on Saturday, and Cento's later Tuesday closing is respected. The running `/api/routes` endpoint returned HTTP 200 with real pedestrian routes for all 15 cafés (`estimated: false`), including both walking times for each new location.
+
+This follow-up changes café data only. The existing browser URL-policy restriction still prevents fresh visual proof; no browser workaround or new screenshot is claimed.

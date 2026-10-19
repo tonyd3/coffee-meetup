@@ -2,6 +2,8 @@ import type { Cafe, Hours } from "@/lib/types";
 
 const daily = (open: string, close: string): Hours[] =>
   Array.from({ length: 7 }, () => ({ open, close }));
+const weekdays = (open: string, close: string): (Hours | null)[] =>
+  daily(open, close).map((h, day) => (day === 0 || day === 6 ? null : h));
 const checked = "2026-10-19";
 const saintFrank = "https://www.saintfrankcoffee.com/pages/our-locations";
 const sightglass = "https://sightglasscoffee.com/pages/our-cafes";
@@ -10,10 +12,93 @@ const sightglassHours = () =>
     day === 0 || day === 6 ? { ...h, open: "07:00" } : h,
   );
 
-// SF whitelist: all public city cafés listed by Verve, Saint Frank and Ritual,
-// plus the retained Sightglass locations. Hours come from the official sources.
-// Coordinates are OSM/Photon points, except FiDi's official linked Google Maps pin.
+// Tony's SF whitelist, including all public city cafés from Verve, Saint Frank
+// and Ritual. Hours come from the linked sources; Blue Bottle uses a current
+// business listing because its official hours feed is inconsistent.
+// Coordinates are OpenStreetMap points, except FiDi's official Google Maps pin.
 export const cafes: Cafe[] = [
+  {
+    id: "andytown-front",
+    name: "Andytown · Front Street",
+    neighbourhood: "Jackson Square",
+    address: "747 Front Street",
+    lat: 37.7982342,
+    lon: -122.3998778,
+    note: "Andytown's downtown kiosk beside Sydney Walton Square.",
+    hours: weekdays("07:00", "16:00"),
+    source: "https://andytownsf.com/pages/locations",
+    checked,
+  },
+  {
+    id: "blue-bottle-sansome",
+    name: "Blue Bottle · Sansome",
+    neighbourhood: "Financial District",
+    address: "115 Sansome Street",
+    lat: 37.7913203,
+    lon: -122.4009518,
+    note: "The Blue Bottle café in the historic 115 Sansome building.",
+    hours: daily("06:30", "17:30").map((h, day) =>
+      day === 0 || day === 6 ? { open: "08:00", close: "14:00" } : h,
+    ),
+    hoursNote: "Hours from current business listings; confirm with the café.",
+    source:
+      "https://www.restaurantji.com/ca/san-francisco/blue-bottle-coffee-8/",
+    checked,
+  },
+  {
+    id: "cento-sutter",
+    name: "Cento Coffee · Sutter",
+    neighbourhood: "Financial District",
+    address: "140 Sutter Street",
+    lat: 37.7900526,
+    lon: -122.402885,
+    note: "Système D by Cento, inside the Center for Architecture + Design.",
+    hours: weekdays("08:00", "16:00").map((h, day) =>
+      h && [1, 5].includes(day) ? { ...h, close: "14:00" } : h,
+    ),
+    source: "https://centocoffee.com/pages/locations",
+    checked,
+  },
+  {
+    id: "flywheel-battery",
+    name: "Flywheel · Battery Street",
+    neighbourhood: "Financial District",
+    address: "22 Battery Street",
+    lat: 37.7914682,
+    lon: -122.3994657,
+    note: "Flywheel's downtown coffee bar on Battery Street.",
+    hours: daily("07:00", "17:00").map((h, day) =>
+      day === 0 || day === 6 ? { open: "08:00", close: "14:00" } : h,
+    ),
+    source: "https://flywheelcoffee.com/",
+    checked,
+  },
+  {
+    id: "loveski-jackson",
+    name: "Loveski · Jackson Square",
+    neighbourhood: "Jackson Square",
+    address: "499 Jackson Street",
+    lat: 37.7963445,
+    lon: -122.4033448,
+    note: "Coffee and bagels at Loveski's Jackson Square deli.",
+    hours: daily("07:00", "19:00").map((h, day) =>
+      day === 0 || day === 6 ? { open: "08:00", close: "17:00" } : h,
+    ),
+    source: "https://www.loveskideli.com/location/san-francisco/",
+    checked,
+  },
+  {
+    id: "paper-son-second",
+    name: "Paper Son · 2nd Street",
+    neighbourhood: "SoMa",
+    address: "303 2nd Street, N102",
+    lat: 37.7855373,
+    lon: -122.3963944,
+    note: "Paper Son's downtown café, featuring Tano SF Wednesday to Friday.",
+    hours: weekdays("08:00", "15:30"),
+    source: "https://papersoncoffee.com/faq",
+    checked,
+  },
   {
     id: "ritual-fidi",
     name: "Ritual · FiDi",
