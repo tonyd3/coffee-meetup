@@ -13,10 +13,11 @@ const sightglassHours = () =>
   );
 
 // Tony's SF whitelist, including all public city cafés from Verve, Saint Frank
-// and Ritual. Hours come from the linked sources; Blue Bottle and Capital One
-// use current business listings where official hours could not be verified.
+// and Ritual. Hours come from the linked sources; Blue Bottle Sansome, Capital
+// One, and La Promenade use business listings where official hours are absent.
+// Research and source conflicts are recorded in docs/meeting-places-research.md.
 // Coordinates use OpenStreetMap, FiDi's official Google Maps pin, and ArcGIS
-// street-address matches for Painted Leopard, Andytown Kearny, and Equator SoMa.
+// street-address matches.
 export const cafes: Cafe[] = [
   {
     id: "andytown-front",
@@ -43,6 +44,21 @@ export const cafes: Cafe[] = [
     checked,
   },
   {
+    id: "andytown-salesforce-park",
+    name: "Andytown · Salesforce Park",
+    neighbourhood: "Transbay",
+    address: "181 Fremont Street, Floor 7",
+    lat: 37.789762899182,
+    lon: -122.395302449537,
+    note: "Rooftop café with indoor tables and Salesforce Park nearby.",
+    hours: daily("07:00", "17:00").map((h, day) =>
+      day === 0 || day === 6 ? { open: "09:00", close: "15:00" } : h,
+    ),
+    hoursNote: "Floor 7; park closures can affect access.",
+    source: "https://andytownsf.com/pages/locations",
+    checked,
+  },
+  {
     id: "blue-bottle-sansome",
     name: "Blue Bottle · Sansome",
     neighbourhood: "Financial District",
@@ -56,6 +72,19 @@ export const cafes: Cafe[] = [
     hoursNote: "Hours from current business listings; confirm with the café.",
     source:
       "https://www.restaurantji.com/ca/san-francisco/blue-bottle-coffee-8/",
+    checked,
+  },
+  {
+    id: "blue-bottle-south-park",
+    name: "Blue Bottle · South Park",
+    neighbourhood: "South Park",
+    address: "2 South Park Street",
+    lat: 37.782429,
+    lon: -122.393248,
+    note: "Bright café with indoor tables beside South Park's public benches.",
+    hours: daily("06:30", "17:00"),
+    hoursNote: "Hours vary across listings; confirm before visiting.",
+    source: "https://bluebottlecoffee.com/cafes/south-park",
     checked,
   },
   {
@@ -88,6 +117,41 @@ export const cafes: Cafe[] = [
     checked,
   },
   {
+    id: "delah-soma",
+    name: "Delah · SoMa",
+    neighbourhood: "SoMa",
+    address: "370 4th Street",
+    lat: 37.780963074314,
+    lon: -122.400262608379,
+    note: "Yemeni coffee and shared pots in a roomy café with evening hours.",
+    hours: daily("06:00", "22:00").map((h, day) =>
+      day === 5
+        ? { ...h, close: "23:00" }
+        : day === 6
+          ? { open: "07:00", close: "23:00" }
+          : day === 0
+            ? { open: "07:00", close: "22:00" }
+            : h,
+    ),
+    hoursNote: "Confirm late-evening hours.",
+    source: "https://delahcoffee.com/contact/",
+    checked,
+  },
+  {
+    id: "equator-fort-mason",
+    name: "Equator · Fort Mason",
+    neighbourhood: "Marina",
+    address: "2 Marina Boulevard, Gatehouse",
+    lat: 37.805505915454,
+    lon: -122.431938993946,
+    note: "Bay-facing outdoor seating at the Fort Mason gatehouse.",
+    hours: daily("06:30", "17:00").map((h, day) =>
+      day === 0 || day === 6 ? { ...h, open: "07:00" } : h,
+    ),
+    source: "https://www.equatorcoffees.com/pages/fort-mason",
+    checked,
+  },
+  {
     id: "equator-soma",
     name: "Equator · SoMa",
     neighbourhood: "SoMa",
@@ -112,6 +176,49 @@ export const cafes: Cafe[] = [
       day === 0 || day === 6 ? { open: "08:00", close: "14:00" } : h,
     ),
     source: "https://flywheelcoffee.com/",
+    checked,
+  },
+  {
+    id: "four-barrel-valencia",
+    name: "Four Barrel · Valencia",
+    neighbourhood: "Mission",
+    address: "375 Valencia Street",
+    lat: 37.767023047324,
+    lon: -122.421789766486,
+    note: "A roastery café for conversation; expect a lively room.",
+    hours: daily("07:00", "17:00"),
+    source: "https://www.fourbarrelcoffee.com/pages/visit-us",
+    checked,
+  },
+  {
+    id: "golden-goat-soma",
+    name: "Golden Goat · SoMa",
+    neighbourhood: "SoMa",
+    address: "599 3rd Street",
+    lat: 37.780486814575,
+    lon: -122.394368621704,
+    note: "Limited bench seating; good for a quick chat or coffee in South Park.",
+    hours: weekdays("08:00", "15:00").map((h, day) =>
+      h && day === 5 ? { ...h, close: "12:00" } : h,
+    ),
+    hoursNote: "Friday/Saturday hours conflict; confirm before visiting.",
+    source: "https://www.goldengoatcoffee.com/visit",
+    checked,
+  },
+  {
+    id: "la-promenade-balboa",
+    name: "La Promenade Café",
+    neighbourhood: "Outer Richmond",
+    address: "3643 Balboa Street",
+    lat: 37.775477328233,
+    lon: -122.498152173356,
+    note: "A roomy neighbourhood café with tables and sofas for conversation.",
+    hours: daily("07:30", "17:00").map((h, day) =>
+      day === 0 || day === 6 ? { ...h, open: "08:00" } : h,
+    ),
+    hoursNote: "Hours from business listings; confirm with the café.",
+    source:
+      "https://www.cylex.us.com/company/la-promenade-caf%C3%A9-32268508.html",
     checked,
   },
   {
@@ -150,6 +257,18 @@ export const cafes: Cafe[] = [
     note: "Paper Son's downtown café, featuring Tano SF Wednesday to Friday.",
     hours: weekdays("08:00", "15:30"),
     source: "https://papersoncoffee.com/faq",
+    checked,
+  },
+  {
+    id: "reveille-mission-bay",
+    name: "Réveille · Mission Bay",
+    neighbourhood: "Mission Bay",
+    address: "610 Long Bridge Street",
+    lat: 37.773342038399,
+    lon: -122.391778697442,
+    note: "Roastery café with indoor seating and a sunny outdoor seating area.",
+    hours: daily("07:00", "17:00"),
+    source: "https://www.reveillecoffee.com/pages/610-long-bridge-street",
     checked,
   },
   {
@@ -252,6 +371,30 @@ export const cafes: Cafe[] = [
     note: "Coffee bar and working roastery in the original 7th Street space.",
     hours: sightglassHours(),
     source: sightglass,
+    checked,
+  },
+  {
+    id: "sohn-dogpatch",
+    name: "Sohn · Dogpatch",
+    neighbourhood: "Dogpatch",
+    address: "2535 3rd Street",
+    lat: 37.757351881711,
+    lon: -122.38804087154,
+    note: "Two-level Korean American café and gathering space with indoor seating.",
+    hours: daily("09:00", "16:00").map((h, day) => (day === 1 ? null : h)),
+    source: "https://www.sohnsf.com/",
+    checked,
+  },
+  {
+    id: "stable-mission",
+    name: "Stable Café · Mission",
+    neighbourhood: "Mission",
+    address: "2128 Folsom Street",
+    lat: 37.763209826203,
+    lon: -122.415457070999,
+    note: "Garden courtyard and indoor seating for a relaxed daytime conversation.",
+    hours: daily("08:00", "15:00").map((h, day) => (day === 1 ? null : h)),
+    source: "https://www.stablecafe.com/",
     checked,
   },
   {
