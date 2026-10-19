@@ -40,3 +40,11 @@ This Mac exhausted its native watcher resources: Turbopack reported an FSEvent e
 No remote repository, Vercel project, deployment, or DNS record was created. The README documents the path to `meet.tony-dong.com`.
 
 The shortlist is an editable starter set. Regular hours are source-checked rather than a live business-hours feed; holiday closures and seating are not guaranteed. Community location/routing endpoints have no availability guarantee. Routing outages use an explicitly labelled estimate. Overnight opening hours and split shifts are outside the first version.
+
+## Compact desktop follow-up
+
+The desktop layout now places the origins side by side, reduces header and section spacing, and presents the calendar choices and café shortlist above their triggers so opening them does not extend the document. At shorter desktop heights, supporting descriptions yield space to the meeting controls. Mobile rules and the slider motion are unchanged.
+
+Verified the initial screen, recommendation, closing warning, calendar choices, and shortlist. At 1066 × 600, the page height stayed at 600 and the closing-warning footer ended at 583px. At 1280 × 720, the page height stayed at 720. At 1440 × 900, the page height stayed at 900 and the footer ended at 797px. Both expanded panels remained inside the viewport, and café inclusion controls worked.
+
+The production build (including TypeScript) and CSS formatting checks passed. Before/after screenshots are retained under `/tmp/coffee-meetup-compact/`; initial baseline capture used 120% browser zoom while later capture used 100%, so these are visual references rather than pixel-matched comparisons. The viewport-fit claims above come from live DOM measurements. No pull request or screenshot uploads were created.
