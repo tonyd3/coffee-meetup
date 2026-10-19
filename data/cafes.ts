@@ -15,7 +15,8 @@ const sightglassHours = () =>
 // Tony's SF whitelist, including all public city cafés from Verve, Saint Frank
 // and Ritual. Hours come from the linked sources; Blue Bottle uses a current
 // business listing because its official hours feed is inconsistent.
-// Coordinates are OpenStreetMap points, except FiDi's official Google Maps pin.
+// Coordinates use OpenStreetMap, FiDi's official Google Maps pin, and an ArcGIS
+// street-address match for Painted Leopard's Maiden Lane entrance.
 export const cafes: Cafe[] = [
   {
     id: "andytown-front",
@@ -85,6 +86,18 @@ export const cafes: Cafe[] = [
       day === 0 || day === 6 ? { open: "08:00", close: "17:00" } : h,
     ),
     source: "https://www.loveskideli.com/location/san-francisco/",
+    checked,
+  },
+  {
+    id: "painted-leopard-maiden",
+    name: "Painted Leopard · Maiden Lane",
+    neighbourhood: "Union Square",
+    address: "166 Maiden Lane",
+    lat: 37.7881447,
+    lon: -122.406196,
+    note: "Painted Leopard's Union Square storefront on Maiden Lane.",
+    hours: daily("09:00", "17:00"),
+    source: "https://paintedleopard.com/pages/find-us",
     checked,
   },
   {

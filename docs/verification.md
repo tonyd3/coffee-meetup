@@ -68,3 +68,9 @@ Sources checked on 19 October 2026: [Andytown](https://andytownsf.com/pages/loca
 Type checking, all 13 tests, formatting, and the production build passed. A targeted data check verified all six additions qualify at 30 minutes before closing and fail at 29, the three weekday-only cafés are excluded on Saturday, and Cento's later Tuesday closing is respected. The running `/api/routes` endpoint returned HTTP 200 with real pedestrian routes for all 15 cafés (`estimated: false`), including both walking times for each new location.
 
 This follow-up changes café data only. The existing browser URL-policy restriction still prevents fresh visual proof; no browser workaround or new screenshot is claimed.
+
+## Painted Leopard follow-up
+
+Added Painted Leopard's permanent SF storefront at 166 Maiden Lane, open daily 9am–5pm according to its [official Find Us page](https://paintedleopard.com/pages/find-us), checked 19 October 2026. The entrance coordinates use an ArcGIS street-address match. The whitelist now has 16 unique, alphabetically ordered cafés. Pop-up locations are outside this addition.
+
+Type checking, all 13 tests, formatting, and the production build passed. A targeted check verified its opening time and exact 30-minute closing cutoff on a weekday, Saturday, and Sunday. The running routing endpoint returned all 16 cafés and both walking times for Painted Leopard. Fresh visual verification remains unavailable under the previously recorded browser restriction.
