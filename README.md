@@ -4,7 +4,7 @@ A small Next.js app for choosing a San Francisco coffee spot between two startin
 
 ## Run
 
-Requires Node.js 22 or later.
+Requires Node.js 22. The deployment uses the same major version as local verification.
 
 ```sh
 npm install
@@ -34,9 +34,9 @@ npm start
 
 Edit **`data/cafes.ts`** to maintain the whitelist. Each café has a stable ID, coordinates, address, note, hours source, last-checked date, and seven daily schedules in **Sunday-first order**. Use `null` when a day has no confirmed opening hours. Optional `dateHours` entries override the weekly schedule for an exact `YYYY-MM-DD` date, including `null` for a date-specific closure. The first version supports same-day opening intervals, rather than overnight hours or split shifts.
 
-The 17-place whitelist includes every public San Francisco city café currently listed by Verve (1), Saint Frank (3), and Ritual (3), two Sightglass locations, and the requested Andytown Front Street, Blue Bottle Sansome, Capital One Café Union Square, Cento Sutter, Flywheel Battery, Loveski Jackson Square, Painted Leopard Maiden Lane, and Paper Son 2nd Street cafés. Capital One Café at 101 Post serves Verve coffee and is labelled under its actual business name. Verve's own SF directory lists only the Market Street café. Saint Frank Mira appears once. The Coffee Movement has been removed. The supplied historical meetup counts and dates do not affect ranking or availability.
+The 29-place whitelist covers downtown, the Mission, Mission Bay, Dogpatch, the Marina, the Sunset, and the Richmond. It includes every public SF city café listed by Verve, Saint Frank, and Ritual when checked, plus the individually selected venues in `data/cafes.ts`. Capital One Café at 101 Post serves Verve coffee and is labelled under its actual business name. Saint Frank Mira appears once, and The Coffee Movement has been removed. Historical meetup counts and dates do not affect ranking or availability. The [meeting-place research](docs/meeting-places-research.md) explains the latest ten additions, seating tradeoffs, sources, and excluded candidates.
 
-Ritual FiDi opens on **22 October 2026**; only its confirmed opening-day hours (8am–3pm) are eligible until its regular schedule is published. Airport cafés, out-of-city locations, and the Ritual roastery closed to the public are excluded. Hours were checked against the linked sources on **19 October 2026**. Blue Bottle's official hours feed returned inconsistent schedules, so its hours use a current business listing corroborated by other listings and are marked for confirmation. Capital One's official site confirms Verve service and public access, but its hours did not render in the available location data; its schedule uses Eater's current venue listing, corroborated by other listings, and is marked accordingly. All other cafés use official hours sources. Holiday hours, special closures, and seating availability need confirmation with the café. Every recommendation links to its hours source.
+Ritual FiDi opens on **22 October 2026**; only its confirmed opening-day hours (8am–3pm) are eligible until its regular schedule is published. Airport cafés, out-of-city locations, and the Ritual roastery closed to the public are excluded. Hours were checked against the linked sources on **19 October 2026**. Blue Bottle Sansome, Capital One, and La Promenade use business-listing hours where official hours were unavailable. Blue Bottle South Park uses the official page's embedded café data. Conflicting Golden Goat, Delah, and Equator SoMa schedules use conservative confirmed windows, with the relevant uncertainty flagged. Holiday hours, special closures, and seating availability need confirmation with the café. Every recommendation links to its hours source.
 
 Visitors can exclude places in the expandable shortlist. Those preferences are saved in their browser's local storage; origins and meeting details are not saved by the app.
 
@@ -56,13 +56,13 @@ The public community endpoints have no availability guarantee and may throttle t
 
 This is standard **Next.js App Router**, with server route handlers. It is ready for a Vercel project, matching the hosting provider used by the personal site and winery simulator. It does not use a static export.
 
-1. Push this repository to GitHub and import it into Vercel as a **Next.js** project. Use the repository root, Node 22+, and the default `npm run build` command. No environment variables are required for the default services.
+1. Push this repository to [tonyd3/coffee-meetup](https://github.com/tonyd3/coffee-meetup) and import it into Vercel as a **Next.js** project. Use the repository root, Node 22.x, and the default `npm run build` command. No environment variables are required for the default services.
 2. Set the production branch to `main`. `vercel.json` allows automatic deployments from `main` only, matching the winery simulator's convention.
 3. In the project's **Settings → Domains**, add `meet.tony-dong.com`.
 4. In the DNS provider for `tony-dong.com`, add the record Vercel displays for the `meet` subdomain. Use Vercel's project-specific target; leave the root-domain records in place.
 5. Wait for Vercel to verify the domain and provision HTTPS, then check location search, a recommendation, and a calendar download on the deployed origin.
 
-Canonical metadata and calendar UIDs already use `meet.tony-dong.com`. No GitHub repository, Vercel project, production deployment, or DNS change is created by the initial local implementation.
+Canonical metadata and calendar UIDs use `meet.tony-dong.com`. Deployment results and any remaining setup are recorded in `docs/verification.md`.
 
 ## Verification
 
