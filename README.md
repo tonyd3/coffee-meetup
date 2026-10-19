@@ -54,13 +54,11 @@ The public community endpoints have no availability guarantee and may throttle t
 
 ## Deploy to meet.tony-dong.com
 
-This is standard **Next.js App Router**, with server route handlers. It is ready for a Vercel project, matching the hosting provider used by the personal site and winery simulator. It does not use a static export.
+The app is deployed to the **coffee-meetup** project in Vercel's **tonyd3s-projects** account, using Next.js App Router with server route handlers and Node 22.x. The public fallback URL is [coffee-meetup.vercel.app](https://coffee-meetup.vercel.app). The custom domain is assigned in Vercel; its Namecheap DNS setup is still pending as of 19 October 2026.
 
-1. Push this repository to [tonyd3/coffee-meetup](https://github.com/tonyd3/coffee-meetup) and import it into Vercel as a **Next.js** project. Use the repository root, Node 22.x, and the default `npm run build` command. No environment variables are required for the default services.
-2. Set the production branch to `main`. `vercel.json` allows automatic deployments from `main` only, matching the winery simulator's convention.
-3. In the project's **Settings → Domains**, add `meet.tony-dong.com`.
-4. In the DNS provider for `tony-dong.com`, add the record Vercel displays for the `meet` subdomain. Use Vercel's project-specific target; leave the root-domain records in place.
-5. Wait for Vercel to verify the domain and provision HTTPS, then check location search, a recommendation, and a calendar download on the deployed origin.
+Pushes to [tonyd3/coffee-meetup](https://github.com/tonyd3/coffee-meetup)'s `main` branch automatically deploy to production. `vercel.json` allows automatic deployments from `main` only, matching the winery simulator's convention. The project uses the repository root and the default `npm run build` command. No environment variables are required for the default services.
+
+To finish the custom domain, add a **CNAME** in Namecheap's Advanced DNS for `tony-dong.com`: host **`meet`**, value **`76d4351de78264c4.vercel-dns-017.com`**, TTL **Automatic**. This is the project-specific value returned by Vercel on 19 October 2026; consult the project's **Settings → Domains** if reconfiguring it later. After DNS propagates, verify HTTPS and the app at [meet.tony-dong.com](https://meet.tony-dong.com).
 
 Canonical metadata and calendar UIDs use `meet.tony-dong.com`. Deployment results and any remaining setup are recorded in `docs/verification.md`.
 

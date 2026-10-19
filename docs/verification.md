@@ -37,7 +37,7 @@ This Mac exhausted its native watcher resources: Turbopack reported an FSEvent e
 
 ## Deployment state and limits
 
-No remote repository, Vercel project, deployment, or DNS record was created. The README documents the path to `meet.tony-dong.com`.
+At initial verification, no remote repository, Vercel project, deployment, or DNS record had been created. The production deployment follow-up below records the subsequent setup.
 
 The shortlist is an editable starter set. Regular hours are source-checked rather than a live business-hours feed; holiday closures and seating are not guaranteed. Community location/routing endpoints have no availability guarantee. Routing outages use an explicitly labelled estimate. Overnight opening hours and split shifts are outside the first version.
 
@@ -114,3 +114,19 @@ South Park uses Blue Bottle's public embedded café data: seven daily 6:30am–5
 Type checking, all 13 tests, formatting, and the production build passed. Targeted checks covered 66 open-day windows across the new cafés' full weekly schedules, opening boundaries, the exact 30-minute cutoff and calendar duration, closed days, and the relevant Friday/weekend exceptions. The running `/api/routes` endpoint returned HTTP 200 with all 29 cafés and positive pedestrian times from both example origins for all ten additions (`estimated: false`). Source evidence, coordinate matches, and the route response are retained under `/tmp/coffee-meetup-research/`.
 
 This is a data and research update. Fresh browser screenshots and viewport-fit checks remain unavailable under the existing browser access restriction; no new visual proof is claimed.
+
+## Production deployment — 19 October 2026
+
+Published the existing app to the user-approved public repository [tonyd3/coffee-meetup](https://github.com/tonyd3/coffee-meetup) and connected it to the **coffee-meetup** Vercel project under **tonyd3s-projects**, matching Winery Simulator's account and `main`-only deployment convention. The first production deployment is [dpl_jv1NFhw5GaaGcBknN66t1mh2zY8c](https://vercel.com/tonyd3s-projects/coffee-meetup/jv1NFhw5GaaGcBknN66t1mh2zY8c), built from `b2e0cd34753f9255293a9e2723b17537dd15c995`. Vercel reports READY, production target, Next.js 16.4.2, and Node 22.x. The remote `main` SHA matched the local commit after publication. Type checking, all 13 tests, formatting, and the local production build passed before deploying; Vercel's own build also passed.
+
+The public production alias [coffee-meetup.vercel.app](https://coffee-meetup.vercel.app) returns HTTP 200 without signing in. Vercel's deployment authentication applies to the deployment-specific URL; the public production alias was tested directly without a bypass token. `meet.tony-dong.com` is assigned to this project, but DNS still has no CNAME or A records. Its authoritative nameservers are Namecheap's `dns1.registrar-servers.com` and `dns2.registrar-servers.com`. Vercel's recommended CNAME is `meet` → `76d4351de78264c4.vercel-dns-017.com`, TTL Automatic. Namecheap requires the user to sign in before this remaining record can be added. Custom-domain DNS and HTTPS are not yet verified.
+
+Live production checks:
+
+- Address search for `415 Mission` returned three results including Salesforce Tower, with no provider-unavailable flag.
+- The route endpoint returned all 29 cafés with positive pedestrian times from both public example origins and `estimated: false`.
+- In the real production browser, the example flow for Tuesday 20 October at 10am selected Painted Leopard Maiden Lane, with 28 / 19 minute walks and the expected 9am–5pm opening hours. The shortlist shows 29 cafés.
+- The Google Calendar link contains the expected café, San Francisco timezone, and 17:00–18:00 UTC interval. The Apple Calendar / Outlook action downloaded `coffee-meetup (1).ics`; readback confirmed valid calendar markers, CRLF, the selected café, and the same one-hour interval. The browser's download-event notification timed out, but the actual newly downloaded file was verified.
+- The deployed page was visually inspected at 1280 × 720 and fits on one page. Screenshot: `/Users/tony/.codex/visualizations/2026/10/19/01a154dc-681e-73b0-ab70-747641e2bd69/coffee-meetup-production.jpg`. Production API responses and a copy of the tested calendar are retained under `/tmp/coffee-meetup-production/`.
+
+The CLI's local `.vercel/` link data and `.env.local` are ignored by Git. The app does not require deployment secrets or a database. The source-checked opening hours and upstream-service limitations described above still apply.
