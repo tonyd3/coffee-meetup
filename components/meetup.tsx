@@ -198,7 +198,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
               }}
             />
             <div className="when-heading">
-              <label htmlFor="meeting-date">When are you meeting?</label>
+              <label htmlFor="meeting-date">When</label>
               <div className="day-shortcuts">
                 <button
                   type="button"
@@ -253,9 +253,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
                 />
               </div>
             </div>
-            <p className="time-hint">
-              San Francisco time · At least 30 minutes before closing.
-            </p>
+            <p className="time-hint">San Francisco time</p>
             <Reveal open={Boolean(error) || Boolean(routes && inPast)}>
               <p className="form-error" role="alert">
                 {error || "Choose a meeting time in the future."}
@@ -286,14 +284,8 @@ export function Meetup({ initialDate }: { initialDate: string }) {
                 className="example-button"
                 onClick={example}
               >
-                Try Hayes Valley & Ferry Building{" "}
-                <span aria-hidden="true">→</span>
+                Try an example <span aria-hidden="true">→</span>
               </button>
-            )}
-            {routes && !loading && (
-              <p className="live-hint">
-                Move the slider or change the time to update your picks.
-              </p>
             )}
           </form>
         </section>
@@ -351,7 +343,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
                 </AnimatePresence>
                 {alternatives.length > 0 && (
                   <div className="alternatives">
-                    <h3 className="eyebrow">ALSO WORTH A LOOK</h3>
+                    <h3 className="eyebrow">OTHER OPTIONS</h3>
                     {alternatives.map((result) => (
                       <button
                         key={result.cafe.id}
@@ -391,8 +383,8 @@ export function Meetup({ initialDate }: { initialDate: string }) {
                 <h3>No coffee at this hour.</h3>
                 <p>
                   {activeCount === 0
-                    ? "Your shortlist is empty. Include a café below to get started."
-                    : "None of the cafés on your shortlist are open for 30 minutes at this time. Try an earlier time or another day."}
+                    ? "Select a café in your shortlist below."
+                    : "No shortlisted cafés stay open for 30 minutes. Try another time."}
                 </p>
                 <button
                   type="button"
@@ -441,7 +433,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
                 </div>
                 <h3>
                   {loading ? (
-                    "Finding your common ground."
+                    "Finding a place…"
                   ) : (
                     <>
                       Somewhere
@@ -450,16 +442,6 @@ export function Meetup({ initialDate }: { initialDate: string }) {
                     </>
                   )}
                 </h3>
-                <p>
-                  {loading
-                    ? "Checking the walk from both starting points."
-                    : "A good coffee, a fair walk, and a little time to catch up."}
-                </p>
-                {!loading && (
-                  <p className="empty-footnote">
-                    Start with two places. We’ll take it from there.
-                  </p>
-                )}
               </m.div>
             )}
           </AnimatePresence>
@@ -483,10 +465,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
         </button>
         <Reveal open={shortlistOpen}>
           <div id="shortlist-content" className="shortlist-content">
-            <p>
-              Choose the places you’d like to meet. Your selection stays in this
-              browser.
-            </p>
+            <p>Saved in this browser.</p>
             <div className="shortlist-list">
               {cafes.map((cafe) => (
                 <div className="shortlist-item" key={cafe.id}>
@@ -516,8 +495,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
               ))}
             </div>
             <p className="shortlist-note">
-              Regular hours checked 19 October 2026. Holiday hours and seating
-              can vary.
+              Hours checked 19 Oct 2026. Holiday hours and seating may vary.
             </p>
           </div>
         </Reveal>

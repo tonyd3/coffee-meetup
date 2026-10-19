@@ -158,9 +158,7 @@ export function LocationField({
           </button>
         )}
       </div>
-      <p className="location-detail">
-        {value.place?.detail || "San Francisco"}
-      </p>
+      <p className="location-detail">{value.place?.detail}</p>
       {open && (
         <div className="location-menu">
           <ul

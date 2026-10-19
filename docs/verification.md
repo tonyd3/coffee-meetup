@@ -88,3 +88,11 @@ The user supplied and I inspected the actual empty-state screenshot before editi
 Formatting, type checking, and the production build passed. Rendered the exact updated SVG markup and relevant CSS with Sharp at the four existing illustration widths (180, 210, 245, and 270px), and inspected every output for aligned markers, centred labels, clear outlines, and clipping. The previews use a sans-serif fallback font; their SVG geometry and styles come from the source. SVGs and PNGs are retained under `/tmp/coffee-meetup-diagram/`.
 
 These isolated SVG renders are previews, not browser screenshots or a matched full-page before/after pair. Fresh browser verification remains unavailable under the previously recorded URL-policy restriction. No pull request or screenshot upload was created.
+
+## UI copy cleanup follow-up
+
+Removed repeated taglines, empty-state explanations, slider paragraphs, the post-search instruction, the result preamble, and generic café blurbs. The slider keeps one line of animated feedback and its detailed screen-reader description. Shortened the date heading, example action, calendar summary, hours link, shortlist copy, and footer credit. Blank location fields no longer repeat San Francisco; selected addresses still show their details. Centred the empty-state illustration and heading in the existing layout footprint.
+
+Opening-hour filtering, the 30-minute minimum, closing-soon warnings, estimated-route labels, San Francisco time, source links, and calendar actions remain. Formatting, type checking, and the production build passed. Server-rendered checks covered the initial page, all five slider values and their accessible description, a regular result, the 30-minute closing warning, and the routing fallback. HTML snapshots are retained under `/tmp/coffee-meetup-copy/`; these are source-render checks rather than browser screenshots.
+
+Reviewed the source diff and the earlier full-page screenshots as layout references. Fresh visual and viewport-fit checks remain unavailable under the existing browser URL-policy restriction, so no new matched screenshot pair is claimed.

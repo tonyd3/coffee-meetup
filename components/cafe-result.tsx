@@ -35,12 +35,7 @@ export function CafeResult({
   }
   return (
     <article className="cafe-result">
-      <div className="result-topline">
-        <span className="eyebrow">YOUR MEETING SPOT</span>
-        <span className="result-neighbourhood">
-          {result.cafe.neighbourhood}
-        </span>
-      </div>
+      <p className="result-neighbourhood">{result.cafe.neighbourhood}</p>
       <h2>{result.cafe.name}</h2>
       <a
         className="address-link"
@@ -51,7 +46,6 @@ export function CafeResult({
         {result.cafe.address}
         <span aria-hidden="true">↗</span>
       </a>
-      <p className="cafe-note">{result.cafe.note}</p>
       <div className="walks" aria-label="Walking times">
         <div>
           <span className="eyebrow">YOU</span>
@@ -75,8 +69,7 @@ export function CafeResult({
       </div>
       {estimated && (
         <p className="estimate-note">
-          Estimated walks. Live routing is unavailable; hills and street routes
-          may take longer.
+          Estimated walks · Live routes unavailable.
         </p>
       )}
       <div className="hours-row">
@@ -90,8 +83,8 @@ export function CafeResult({
       </div>
       <Reveal open={result.remaining < 60}>
         <p className="closing-warning">
-          <span aria-hidden="true">◷</span>Closes at {timeLabel(hours.close)} —
-          you’ll have {result.remaining} minutes together.
+          <span aria-hidden="true">◷</span>Closes at {timeLabel(hours.close)} ·{" "}
+          {result.remaining} min left.
         </p>
       </Reveal>
       <div className="calendar-section">
@@ -107,7 +100,7 @@ export function CafeResult({
         <Reveal open={calendarOpen}>
           <div className="calendar-options">
             <p>
-              {result.duration}-minute coffee, starting at {timeLabel(time)}.
+              {result.duration} min · {timeLabel(time)}
             </p>
             <a
               href={googleCalendar(result, date, time)}
@@ -123,12 +116,8 @@ export function CafeResult({
         </Reveal>
       </div>
       <p className="hours-note">
-        {Object.hasOwn(result.cafe.dateHours ?? {}, date)
-          ? "Hours for this date"
-          : "Regular hours"}{" "}
-        ·{" "}
         <a href={result.cafe.source} target="_blank" rel="noreferrer">
-          Check holiday hours ↗
+          Check hours ↗
         </a>
       </p>
     </article>

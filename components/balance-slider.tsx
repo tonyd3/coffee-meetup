@@ -26,7 +26,7 @@ export function BalanceSlider({
   return (
     <div className="balance">
       <div className="field-heading">
-        <label id="balance-label">Make it convenient</label>
+        <label id="balance-label">Walking balance</label>
         <span className="eyebrow small">ON FOOT</span>
       </div>
       <Slider.Root
@@ -85,18 +85,9 @@ export function BalanceSlider({
         <Crossfade value={balanceLabels[value]}>
           {balanceLabels[value]}
         </Crossfade>
-        <div className="balance-descriptions">
-          {descriptions.map((line, index) => (
-            <p
-              key={line}
-              inert={index !== value}
-              id={index === value ? "balance-description" : undefined}
-              className={index === value ? "shown" : ""}
-            >
-              {line}
-            </p>
-          ))}
-        </div>
+        <p id="balance-description" className="sr-only">
+          {descriptions[value]}
+        </p>
       </div>
     </div>
   );

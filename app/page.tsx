@@ -15,20 +15,18 @@ export default function Home() {
           meet<span>.</span>
         </a>
         <div className="masthead-note">
-          <span>GOOD COFFEE. COMMON GROUND.</span>
           <span>SAN FRANCISCO</span>
         </div>
       </header>
       <main>
         <div className="page-intro">
           <h1>Let’s meet for coffee.</h1>
-          <p>Two starting points. One good place.</p>
         </div>
         <Meetup initialDate={tomorrow} />
       </main>
       <footer>
         <a href="https://tony-dong.com" target="_blank" rel="noreferrer">
-          A little project by Tony Dong <span aria-hidden="true">↗</span>
+          Tony Dong <span aria-hidden="true">↗</span>
         </a>
         <span>
           Places & routes ©{" "}
