@@ -19,6 +19,11 @@ import { LocationField, type LocationValue } from "./location-field";
 import { change, Reveal } from "./motion";
 
 const EMPTY: LocationValue = { text: "", place: null };
+const resultStates = {
+  hidden: { opacity: 0, y: 6 },
+  visible: { opacity: 1, y: 0 },
+  exit: { opacity: 0 },
+};
 export function Meetup({ initialDate }: { initialDate: string }) {
   const [you, setYou] = useState<LocationValue>(EMPTY);
   const [them, setThem] = useState<LocationValue>(EMPTY);
@@ -33,6 +38,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const request = useRef<AbortController | null>(null);
   const resultsRef = useRef<HTMLElement>(null);
+  const scrollAfterSearch = useRef(false);
   const [today, setToday] = useState(initialDate);
   useEffect(() => {
     setToday(sfToday());
@@ -54,6 +60,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
   }, []);
   function changeOrigin(which: "you" | "them", value: LocationValue) {
     request.current?.abort();
+    scrollAfterSearch.current = false;
     setLoading(false);
     setRoutes(null);
     setError("");
@@ -88,6 +95,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
       return;
     }
     request.current?.abort();
+    scrollAfterSearch.current = false;
     const controller = new AbortController();
     request.current = controller;
     setLoading(true);
@@ -106,19 +114,9 @@ export function Meetup({ initialDate }: { initialDate: string }) {
           data.error || "Couldn’t find a walking route. Please try again.",
         );
       if (controller.signal.aborted) return;
+      scrollAfterSearch.current =
+        window.matchMedia("(max-width: 760px)").matches;
       setRoutes(data);
-      if (window.matchMedia("(max-width: 760px)").matches)
-        setTimeout(
-          () =>
-            resultsRef.current?.scrollIntoView({
-              behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
-                .matches
-                ? "instant"
-                : "smooth",
-              block: "start",
-            }),
-          150,
-        );
     } catch (e) {
       if (!controller.signal.aborted)
         setError(
@@ -141,6 +139,16 @@ export function Meetup({ initialDate }: { initialDate: string }) {
     setDate(value);
     setSelectedId(null);
     setError("");
+  }
+  function scrollToResults() {
+    if (!scrollAfterSearch.current) return;
+    scrollAfterSearch.current = false;
+    resultsRef.current?.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth",
+      block: "start",
+    });
   }
   const matches =
     routes && date && time
@@ -303,9 +311,13 @@ export function Meetup({ initialDate }: { initialDate: string }) {
               <m.div
                 key="results"
                 className="results-content"
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
+                variants={resultStates}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                onAnimationComplete={(state) => {
+                  if (state === "visible") scrollToResults();
+                }}
                 transition={change}
               >
                 <p className="meeting-summary">
@@ -359,8 +371,13 @@ export function Meetup({ initialDate }: { initialDate: string }) {
               <m.div
                 key="no-results"
                 className="empty-state no-results"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                variants={resultStates}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                onAnimationComplete={(state) => {
+                  if (state === "visible") scrollToResults();
+                }}
                 transition={change}
               >
                 <span className="empty-mark" aria-hidden="true">

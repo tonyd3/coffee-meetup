@@ -937,19 +937,23 @@ footer a:hover {
 }
 @media (max-width: 760px) {
   .shell {
-    padding: 0 24px;
+    padding: 0 max(20px, env(safe-area-inset-right)) env(safe-area-inset-bottom)
+      max(20px, env(safe-area-inset-left));
     max-width: 540px;
   }
   .masthead {
-    height: 80px;
+    height: 64px;
+  }
+  .wordmark {
+    font-size: 40px;
   }
   .masthead-note {
     font-size: 8px;
     letter-spacing: 0.1em;
   }
   .page-intro {
-    padding: 26px 0;
-    font-size: 26px;
+    padding: 22px 0;
+    font-size: 24px;
     letter-spacing: -0.7px;
   }
   .workspace.has-results {
@@ -959,26 +963,176 @@ footer a:hover {
   .origins {
     gap: 16px;
   }
+  .field-heading {
+    font-size: 14px;
+  }
   .location-input input {
     font-size: 16px;
+    height: 48px;
+  }
+  .clear-location {
+    width: 44px;
+    height: 48px;
+    font-size: 24px;
   }
   .location-detail {
-    font-size: 9px;
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: normal;
+    min-height: 0;
+  }
+  .location-detail:empty {
+    display: none;
+  }
+  .location-menu {
+    top: 68px;
+    left: 0;
+    right: 0;
+    max-height: min(280px, 35dvh);
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    touch-action: pan-y;
+  }
+  .location-menu li {
+    min-height: 56px;
+    font-size: 14px;
+  }
+  .location-menu li small,
+  .search-status {
+    font-size: 12px;
+  }
+  .balance {
+    margin: 20px 0;
+  }
+  .balance-heading {
+    font-size: 10px;
+  }
+  .crossfade {
+    font-size: 12px;
+    text-align: center;
+  }
+  .balance-control {
+    height: 44px;
+  }
+  .balance-thumb {
+    width: 44px;
+    height: 44px;
+  }
+  .balance-thumb > span {
+    inset: 11px;
+  }
+  .balance-stops {
+    inset-inline: 22px;
+  }
+  .when-label {
+    font-size: 14px;
+  }
+  .when-label > span {
+    font-size: 11px;
+  }
+  .day-shortcuts {
+    gap: 4px;
+    font-size: 12px;
+  }
+  .day-shortcuts button {
+    min-height: 44px;
+    padding: 0 6px;
   }
   .date-time-row {
-    gap: 14px;
-    grid-template-columns: 1.4fr 1fr;
+    gap: 12px;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   }
   .date-time-row input {
+    font-size: 16px;
+    height: 44px;
+  }
+  .primary {
+    min-height: 48px;
     font-size: 14px;
-    height: 36px;
+  }
+  .example-button {
+    min-height: 44px;
+    font-size: 12px;
+  }
+  .form-error {
+    font-size: 13px;
   }
   .results {
     border-top: 1px solid var(--line);
     padding-top: 24px;
+    scroll-margin-top: 16px;
+  }
+  .meeting-summary,
+  .result-neighbourhood {
+    font-size: 12px;
   }
   .cafe-result h2 {
-    font-size: 30px;
+    font-size: clamp(24px, 7.2vw, 30px);
+  }
+  .address-link {
+    min-height: 44px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .walks .eyebrow {
+    font-size: 11px;
+  }
+  .walks strong {
+    font-size: 32px;
+  }
+  .walks p > span,
+  .hours-row {
+    font-size: 12px;
+  }
+  .hours-row a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .closing-warning,
+  .estimate-note {
+    font-size: 13px;
+  }
+  .calendar-options p {
+    font-size: 12px;
+  }
+  .calendar-options a,
+  .calendar-options button {
+    min-height: 48px;
+    align-items: center;
+    font-size: 14px;
+  }
+  .alternatives summary {
+    min-height: 48px;
+    font-size: 14px;
+  }
+  .alternative {
+    min-height: 64px;
+    gap: 12px;
+  }
+  .alternative > span:first-child {
+    min-width: 0;
+  }
+  .alternative strong,
+  .alternative .alternative-times {
+    font-size: 14px;
+  }
+  .alternative small {
+    font-size: 12px;
+  }
+  .text-button {
+    min-height: 48px;
+    font-size: 14px;
+  }
+  .shortlist-toggle {
+    min-height: 48px;
+  }
+  .shortlist-toggle > span:first-child {
+    font-size: 14px;
+  }
+  .shortlist-toggle small,
+  .shortlist-content > p {
+    font-size: 12px;
   }
   .shortlist-list {
     grid-template-columns: 1fr;
@@ -986,15 +1140,39 @@ footer a:hover {
   .shortlist-item {
     padding: 14px 0;
   }
+  .shortlist-item label {
+    min-height: 44px;
+  }
+  .shortlist-item input {
+    width: 20px;
+    height: 20px;
+  }
   .shortlist-item strong {
-    font-size: 11px;
+    font-size: 14px;
   }
   .shortlist-item small,
   .shortlist-item a {
-    font-size: 10px;
+    font-size: 12px;
+  }
+  .shortlist-item a {
+    display: inline-flex;
+    min-width: 48px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .shortlist-content > p.shortlist-note {
+    font-size: 11px;
   }
   footer {
-    font-size: 8px;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    font-size: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .origins {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 @media (prefers-reduced-motion: reduce) {

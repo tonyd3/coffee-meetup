@@ -172,8 +172,8 @@ export function LocationField({
                 className={i === active ? "active" : ""}
                 onPointerDown={(event) => {
                   event.preventDefault();
-                  choose(place);
                 }}
+                onClick={() => choose(place)}
                 onPointerMove={() => setActive(i)}
               >
                 <span>{place.name}</span>

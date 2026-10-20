@@ -21,3 +21,13 @@ Content plan: two labelled origins, one balance control, date and time, and one 
 Interaction thesis: retain the freely moving five-stop slider and crossfading balance label. Fade between café recommendations; use a native disclosure for alternatives. Preserve keyboard controls, live announcements, closing warnings and reduced motion.
 
 Evidence: baseline `b54118fa1a93a3c2c4c0f934cae1c4f44059fd38`, local route `http://127.0.0.1:3017/`, light appearance, all 34 cafés included. Desktop captures use the existing 1280×720 browser viewport; mobile captures use 390×844. Matched empty and result screenshots are retained outside Git in the task's `simplify` artifact directory. The mobile result captures have different scroll offsets because the shorter page reaches its bottom sooner.
+
+## Phone usability — 19 October 2026
+
+Visual thesis: retain the paper-and-brass styling with readable phone text and controls sized for fingers.
+
+Content plan: give origins full-width rows on narrow phones, keep date and time together, and retain one primary search action. Make suggestions, café choices and calendar options readable without adding explanatory copy.
+
+Interaction thesis: keep the five-stop slider's motion with a larger touch target; allow the suggestion menu to scroll; scroll to a café only after its reveal has finished. Keep the desktop composition and browser zoom available.
+
+Evidence baseline: `0c7749f49733379b727161bf13e41847fb86e4f4`, local route `http://127.0.0.1:3017/`, 390×844 and 320×740 phone viewports and the existing 1280×720 desktop viewport. Phone scenarios cover the empty form, suggestions, a recommendation with calendar options, and the café list. All 34 cafés are included; result inputs use Hayes Valley / Ferry Building, 20 October 2026 at 10am SF time. Native browser screenshots are retained outside Git in the task's `mobile-friendly` artifact directory.
