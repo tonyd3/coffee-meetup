@@ -25,9 +25,15 @@ export function BalanceSlider({
   const settling = held === null && glide;
   return (
     <div className="balance">
-      <div className="field-heading">
-        <label id="balance-label">Walking balance</label>
-        <span className="eyebrow small">ON FOOT</span>
+      <label id="balance-label" className="sr-only">
+        Walking balance
+      </label>
+      <div className="balance-heading" aria-hidden="true">
+        <span>Closer to you</span>
+        <Crossfade value={balanceLabels[value]}>
+          {balanceLabels[value]}
+        </Crossfade>
+        <span>Closer to them</span>
       </div>
       <Slider.Root
         min={0}
@@ -77,18 +83,9 @@ export function BalanceSlider({
           </Slider.Thumb>
         </Slider.Control>
       </Slider.Root>
-      <div className="balance-ends" aria-hidden="true">
-        <span>Closer to you</span>
-        <span>Closer to them</span>
-      </div>
-      <div className="balance-copy">
-        <Crossfade value={balanceLabels[value]}>
-          {balanceLabels[value]}
-        </Crossfade>
-        <p id="balance-description" className="sr-only">
-          {descriptions[value]}
-        </p>
-      </div>
+      <p id="balance-description" className="sr-only">
+        {descriptions[value]}
+      </p>
     </div>
   );
 }

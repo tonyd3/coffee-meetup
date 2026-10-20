@@ -6,12 +6,10 @@ import type { Place } from "@/lib/types";
 export type LocationValue = { text: string; place: Place | null };
 export function LocationField({
   label,
-  letter,
   value,
   onChange,
 }: {
   label: string;
-  letter: string;
   value: LocationValue;
   onChange: (value: LocationValue) => void;
 }) {
@@ -90,7 +88,6 @@ export function LocationField({
   return (
     <div className="location-field" ref={root}>
       <label htmlFor={id} className="field-heading">
-        <span className="person-letter">{letter}</span>
         {label}
       </label>
       <div className={`location-input${value.place ? " selected" : ""}`}>
@@ -105,7 +102,7 @@ export function LocationField({
           aria-activedescendant={
             open && active >= 0 ? `${id}-option-${active}` : undefined
           }
-          placeholder="Address or neighbourhood"
+          placeholder="Address or area"
           value={value.text}
           onFocus={() => {
             if (!value.place) setOpen(true);
@@ -147,7 +144,7 @@ export function LocationField({
           <button
             type="button"
             className="clear-location"
-            aria-label={`Clear ${label.toLowerCase()}`}
+            aria-label={`Clear location for ${label.toLowerCase()}`}
             onClick={() => {
               onChange({ text: "", place: null });
               setOpen(true);
@@ -164,7 +161,7 @@ export function LocationField({
           <ul
             id={`${id}-list`}
             role="listbox"
-            aria-label={`${label} suggestions`}
+            aria-label={`Suggestions for ${label.toLowerCase()}`}
           >
             {options.map((place, i) => (
               <li

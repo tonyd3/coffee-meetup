@@ -25,7 +25,8 @@ input {
 }
 button,
 a,
-input {
+input,
+summary {
   -webkit-tap-highlight-color: transparent;
 }
 button {
@@ -46,7 +47,8 @@ button:disabled {
   opacity: 0.55;
 }
 button:focus-visible,
-a:focus-visible {
+a:focus-visible,
+summary:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 5px;
 }
@@ -75,7 +77,7 @@ button {
   padding: 0 48px;
 }
 .masthead {
-  height: 148px;
+  height: 72px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -83,12 +85,12 @@ button {
 }
 .wordmark {
   font-family: var(--font-serif), serif;
-  font-size: 60px;
-  letter-spacing: -4px;
+  font-size: 44px;
+  letter-spacing: -3px;
   line-height: 1;
   font-style: italic;
   font-weight: 450;
-  padding-bottom: 10px;
+  padding-bottom: 6px;
 }
 .wordmark span {
   color: var(--accent);
@@ -101,32 +103,27 @@ button {
   line-height: 1.5;
 }
 .page-intro {
-  padding: 38px 0 40px;
-}
-.page-intro h1 {
+  padding: 30px 0;
+  text-align: center;
   font-family: var(--font-serif), serif;
   font-weight: 400;
-  font-size: 31px;
+  font-size: 28px;
   letter-spacing: -0.7px;
 }
 .workspace {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 74px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
 }
-.section-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid var(--line);
-  padding: 17px 0 29px;
+.workspace.has-results {
+  max-width: none;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
-.section-title h2 {
-  font-family: var(--font-serif), serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 21px;
-  letter-spacing: -0.2px;
+.plan {
+  min-width: 0;
 }
 .eyebrow {
   font-size: 9px;
@@ -134,11 +131,6 @@ button {
   letter-spacing: 0.12em;
   color: var(--muted);
   line-height: 1.5;
-}
-.eyebrow.small {
-  font-size: 8px;
-  letter-spacing: 0.1em;
-  color: #8c8378;
 }
 .field-heading {
   font-size: 12px;
@@ -148,20 +140,10 @@ button {
   gap: 8px;
   line-height: 1.4;
 }
-.person-letter {
-  font-size: 8px;
-  color: var(--accent);
-  border: 1px solid #d8c8ac;
-  width: 17px;
-  height: 17px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
 .origins {
   display: grid;
-  gap: 22px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
 }
 .location-field {
   position: relative;
@@ -181,9 +163,9 @@ button {
   border: 0;
   background: none;
   width: 100%;
-  padding: 10px 0 9px;
+  padding: 8px 0;
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.4;
   min-width: 0;
   color: var(--ink);
   border-radius: 0;
@@ -215,7 +197,7 @@ button {
 .location-menu {
   position: absolute;
   z-index: 20;
-  top: 68px;
+  top: 57px;
   left: -12px;
   right: -12px;
   padding: 6px;
@@ -252,14 +234,19 @@ button {
   line-height: 1.5;
 }
 .balance {
-  margin: 31px 0 27px;
+  margin: 24px 0;
 }
-.balance .field-heading {
+.balance-heading {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 9px;
+  color: var(--muted);
 }
 .balance-control {
-  height: 24px;
+  height: 32px;
   width: 100%;
   position: relative;
   display: flex;
@@ -269,7 +256,7 @@ button {
   cursor: pointer;
 }
 .balance-track {
-  height: 24px;
+  height: 10px;
   width: 100%;
   border-radius: 99px;
   position: relative;
@@ -282,7 +269,7 @@ button {
   overflow: hidden;
   border-radius: 99px;
   background: var(--accent);
-  opacity: 0.9;
+  opacity: 0.7;
 }
 .balance-stops {
   position: absolute;
@@ -332,22 +319,13 @@ button {
 .settling .balance-thumb {
   transition: inset-inline-start 0.2s var(--ease-out);
 }
-.balance-ends {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 9px;
-}
-.balance-copy {
-  margin-top: 17px;
-}
 .crossfade {
   position: relative;
   display: inline-flex;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   min-height: 18px;
+  color: var(--ink);
 }
 .crossfade > span {
   display: inline-flex;
@@ -357,11 +335,19 @@ button {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  margin-bottom: 13px;
+  margin-bottom: 9px;
 }
-.when-heading > label {
+.when-label {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
   font-size: 12px;
   font-weight: 500;
+}
+.when-label > span {
+  font-size: 9px;
+  font-weight: 400;
+  color: var(--muted);
 }
 .day-shortcuts {
   display: flex;
@@ -417,25 +403,19 @@ input::-webkit-calendar-picker-indicator {
 input::-webkit-calendar-picker-indicator:hover {
   opacity: 1;
 }
-.time-hint {
-  font-size: 10px;
-  color: var(--muted);
-  line-height: 1.5;
-  margin-top: 9px;
-}
 .primary {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
   gap: 15px;
-  padding: 14px 17px;
+  padding: 11px 15px;
   background: var(--ink);
   color: var(--bg);
   border: 1px solid var(--ink);
   border-radius: 3px;
   font-size: 12px;
-  min-height: 46px;
+  min-height: 44px;
   text-align: left;
 }
 .primary:hover:not(:disabled) {
@@ -448,13 +428,13 @@ input::-webkit-calendar-picker-indicator:hover {
   line-height: 1;
 }
 .find-button {
-  margin-top: 25px;
+  margin-top: 20px;
 }
 .example-button {
   font-size: 10px;
   color: var(--muted);
   display: block;
-  margin: 13px auto 0;
+  margin: 7px auto 0;
   padding: 5px 0;
 }
 .example-button span {
@@ -481,51 +461,30 @@ input::-webkit-calendar-picker-indicator:hover {
   min-width: 0;
   scroll-margin-top: 24px;
 }
-.empty-state {
-  padding: 34px 10px 30px;
+.results[hidden] {
+  display: none;
+}
+.result-loading {
+  padding: 60px 0;
   text-align: center;
-  min-height: 438px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.empty-state {
+  padding: 40px 16px;
+  text-align: center;
+  min-height: 240px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.meeting-diagram {
-  width: 270px;
-  max-width: 100%;
-  margin-bottom: 28px;
-}
-.meeting-diagram svg {
-  display: block;
-  width: 100%;
-  stroke: #d7c6a8;
-  stroke-width: 0.7;
-}
-.meeting-diagram .diagram-centre {
-  fill: var(--accent);
-  stroke: var(--accent);
-}
-.meeting-diagram .diagram-person {
-  fill: var(--bg);
-  stroke: var(--muted);
-}
-.meeting-diagram .diagram-label {
-  fill: var(--muted);
-  stroke: none;
-  text-anchor: middle;
-  font-size: 15px;
-  letter-spacing: 0.04em;
-}
-.empty-state h3 {
+.empty-state h2 {
   font-family: var(--font-serif), serif;
-  font-size: 38px;
+  font-size: 28px;
   font-weight: 350;
   line-height: 1.18;
   letter-spacing: -0.8px;
-}
-.empty-state h3 em {
-  color: var(--accent);
-  font-weight: 350;
 }
 .empty-state > p {
   font-size: 12px;
@@ -534,23 +493,13 @@ input::-webkit-calendar-picker-indicator:hover {
   max-width: 250px;
   margin-top: 18px;
 }
-.is-loading .diagram-centre {
-  animation: breathe 1.5s ease-in-out infinite;
-  transform-origin: center;
-  transform-box: fill-box;
-}
-.is-loading h3 {
-  font-size: 29px;
-  max-width: 250px;
-}
 .loading-label {
   animation: subtle-fade 1.4s ease-in-out infinite;
 }
 .meeting-summary {
   font-size: 10px;
   color: var(--muted);
-  margin-top: -6px;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 .meeting-summary span {
   padding: 0 5px;
@@ -562,7 +511,7 @@ input::-webkit-calendar-picker-indicator:hover {
 }
 .cafe-result h2 {
   font-family: var(--font-serif), serif;
-  font-size: 32px;
+  font-size: 29px;
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: -0.6px;
@@ -585,17 +534,17 @@ input::-webkit-calendar-picker-indicator:hover {
 }
 .walks {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   text-align: center;
-  margin: 26px 0 23px;
-  padding: 21px 0;
+  margin: 16px 0;
+  padding: 12px 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 .walks > div {
   display: grid;
-  gap: 7px;
+  gap: 4px;
 }
 .walks > div > p {
   display: flex;
@@ -613,27 +562,6 @@ input::-webkit-calendar-picker-indicator:hover {
 .walks p > span {
   font-size: 9px;
   color: var(--muted);
-}
-.walk-connector {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #c7b695;
-  font-size: 10px;
-  letter-spacing: 1px;
-  white-space: nowrap;
-  gap: 4px;
-}
-.walk-connector > span {
-  font-size: 14px;
-  letter-spacing: 0;
-}
-.walk-connector i {
-  width: 4px;
-  height: 4px;
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-  flex-shrink: 0;
 }
 .hours-row {
   display: flex;
@@ -660,7 +588,7 @@ input::-webkit-calendar-picker-indicator:hover {
   font-size: 11px;
   color: #936f35;
   line-height: 1.7;
-  padding-top: 14px;
+  padding-top: 8px;
   display: flex;
   gap: 7px;
   align-items: baseline;
@@ -669,7 +597,7 @@ input::-webkit-calendar-picker-indicator:hover {
   font-size: 15px;
 }
 .calendar-section {
-  margin-top: 22px;
+  margin-top: 14px;
 }
 .calendar-button {
   background: transparent;
@@ -704,29 +632,41 @@ input::-webkit-calendar-picker-indicator:hover {
 .calendar-options button:hover {
   color: var(--accent);
 }
-.hours-note {
-  margin-top: 11px;
-  font-size: 9px;
-  line-height: 1.6;
-  color: #92887b;
-}
-.hours-note a:hover {
-  color: var(--ink);
-}
 .estimate-note {
   font-size: 10px;
   color: #936f35;
   line-height: 1.7;
   margin: -10px 0 16px;
 }
-.alternatives {
-  margin-top: 30px;
+.hours-row a:hover {
+  color: var(--ink);
 }
-.alternatives h3 {
-  font-size: 8px;
-  font-weight: 500;
-  letter-spacing: 0.13em;
-  margin-bottom: 8px;
+.alternatives {
+  margin-top: 10px;
+}
+.alternatives summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  font-size: 11px;
+  color: var(--muted);
+  list-style: none;
+  cursor: pointer;
+}
+.alternatives summary::-webkit-details-marker {
+  display: none;
+}
+.alternatives summary::after {
+  content: "+";
+  font-size: 15px;
+}
+.alternatives[open] summary::after {
+  content: "−";
+}
+.alternatives summary:hover,
+.alternatives[open] summary {
+  color: var(--ink);
 }
 .alternative {
   border-top: 1px solid var(--line);
@@ -735,9 +675,9 @@ input::-webkit-calendar-picker-indicator:hover {
   justify-content: space-between;
   gap: 16px;
   align-items: center;
-  padding: 13px 0;
+  padding: 10px 0;
   text-align: left;
-  min-height: 63px;
+  min-height: 48px;
 }
 .alternative:last-child {
   border-bottom: 1px solid var(--line);
@@ -766,16 +706,12 @@ input::-webkit-calendar-picker-indicator:hover {
 .alternative:hover strong {
   color: var(--accent);
 }
-.no-results {
-  padding-top: 62px;
-  min-height: 438px;
-}
 .empty-mark {
   font-size: 32px;
   color: var(--accent);
   margin-bottom: 23px;
 }
-.no-results h3 {
+.no-results h2 {
   font-size: 29px;
   line-height: 1.3;
 }
@@ -791,9 +727,15 @@ input::-webkit-calendar-picker-indicator:hover {
   text-underline-offset: 5px;
 }
 .shortlist-section {
-  margin-top: 44px;
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 22px auto 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+}
+.workspace.has-results + .shortlist-section {
+  max-width: none;
 }
 .shortlist-toggle {
   display: flex;
@@ -802,7 +744,7 @@ input::-webkit-calendar-picker-indicator:hover {
   align-items: center;
   gap: 20px;
   text-align: left;
-  padding: 19px 0;
+  padding: 11px 0;
 }
 .shortlist-toggle > span:first-child {
   display: flex;
@@ -893,7 +835,7 @@ input::-webkit-calendar-picker-indicator:hover {
   margin-bottom: 0;
 }
 footer {
-  padding: 25px 0 34px;
+  padding: 14px 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -922,143 +864,18 @@ footer a:hover {
   white-space: nowrap;
   border: 0;
 }
-@keyframes breathe {
-  50% {
-    opacity: 0.4;
-    transform: scale(0.75);
-  }
-}
 @keyframes subtle-fade {
   50% {
     opacity: 0.5;
   }
 }
 @media (min-width: 761px) {
-  .shell {
-    padding-top: clamp(0px, calc((100svh - 600px) / 6), 24px);
-  }
-  .masthead {
-    height: 64px;
-  }
-  .wordmark {
-    font-size: 44px;
-    padding-bottom: 6px;
-    letter-spacing: -3px;
-  }
-  .page-intro {
-    padding: 16px 0 20px;
-  }
-  .page-intro h1 {
-    font-size: 25px;
-  }
-  .section-title {
-    padding: 9px 0 15px;
-  }
-  .section-title h2 {
-    font-size: 20px;
-  }
-  .origins {
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  .location-input input {
-    padding: 6px 0;
-    line-height: 1.4;
-  }
-  .clear-location {
-    height: 33px;
-    width: 22px;
-  }
-  .location-detail {
-    margin-top: 4px;
-    line-height: 1.3;
-  }
-  .location-menu {
-    top: 55px;
-    min-width: 240px;
-  }
-  .balance {
-    margin: 20px 0;
-  }
-  .balance .field-heading {
-    margin-bottom: 10px;
-  }
-  .balance-ends {
-    margin-top: 6px;
-  }
-  .balance-copy {
-    margin-top: 10px;
-  }
-  .when-heading {
-    margin-bottom: 8px;
-  }
-  .time-hint {
-    margin-top: 6px;
-  }
-  .primary {
-    min-height: 40px;
-    padding: 10px 14px;
-  }
-  .find-button {
-    margin-top: 18px;
-  }
-  .example-button {
-    margin-top: 7px;
-  }
   .results {
     border-left: 1px solid var(--line);
-    padding-left: 47px;
-  }
-  .workspace {
-    gap: 47px;
-  }
-  .results .section-title {
-    margin-left: -1px;
-  }
-  .plan {
-    padding-bottom: 0;
-  }
-  .empty-state {
-    min-height: 340px;
-    padding: 15px 10px;
-  }
-  .meeting-diagram {
-    width: 210px;
-    margin-bottom: 15px;
-  }
-  .empty-state h3 {
-    font-size: 32px;
-  }
-  .empty-state > p {
-    margin-top: 12px;
-  }
-  .meeting-summary {
-    margin-top: 0;
-    margin-bottom: 12px;
-  }
-  .cafe-result h2 {
-    font-size: 27px;
-    margin-top: 6px;
-  }
-  .address-link {
-    margin-top: 6px;
-  }
-  .walks {
-    margin: 12px 0;
-    padding: 10px 0;
-  }
-  .walks > div {
-    gap: 3px;
-  }
-  .walks strong {
-    font-size: 25px;
-  }
-  .closing-warning {
-    padding-top: 8px;
+    padding-left: 40px;
   }
   .calendar-section {
     position: relative;
-    margin-top: 12px;
   }
   .calendar-section > .reveal {
     position: absolute;
@@ -1073,38 +890,12 @@ footer a:hover {
   .calendar-options {
     padding: 12px 14px;
   }
-  .hours-note {
-    margin-top: 6px;
-  }
-  .estimate-note {
-    margin: 0 0 8px;
-  }
-  .alternatives {
-    margin-top: 16px;
-  }
-  .alternatives h3 {
-    margin-bottom: 6px;
-  }
-  .alternative {
-    min-height: 46px;
-    padding: 7px 0;
-  }
-  .alternative > span {
-    gap: 2px;
-  }
-  .shortlist-section {
-    position: relative;
-    margin-top: 18px;
-  }
-  .shortlist-toggle {
-    padding: 9px 0;
-  }
   .shortlist-section > .reveal {
     position: absolute;
     bottom: calc(100% + 6px);
     inset-inline: 0;
     z-index: 20;
-    max-height: calc(100svh - 120px);
+    max-height: min(360px, calc(100svh - 140px));
     overflow-y: auto;
     background: var(--bg);
     border: 1px solid var(--line);
@@ -1114,86 +905,23 @@ footer a:hover {
   .shortlist-content {
     padding: 16px 20px;
   }
-  footer {
-    padding: 12px 0 16px;
+  .workspace:not(.has-results) + .shortlist-section .shortlist-list {
+    grid-template-columns: 1fr;
   }
 }
 @media (min-width: 761px) and (max-height: 800px) {
   .masthead {
-    height: 44px;
+    height: 56px;
   }
   .wordmark {
     font-size: 36px;
   }
   .page-intro {
-    padding: 8px 0 10px;
-  }
-  .page-intro h1 {
-    font-size: 23px;
-  }
-  .section-title {
-    padding: 4px 0 8px;
-  }
-  .balance {
-    margin: 14px 0;
-  }
-  .balance-copy {
-    margin-top: 7px;
-  }
-  .find-button {
-    margin-top: 14px;
-  }
-  .empty-state {
-    min-height: 290px;
-    padding-top: 8px;
-  }
-  .meeting-diagram {
-    width: 180px;
-    margin-bottom: 10px;
-  }
-  .empty-state h3 {
-    font-size: 29px;
+    padding: 24px 0;
+    font-size: 26px;
   }
   .cafe-result h2 {
-    font-size: 25px;
-    line-height: 1.15;
-  }
-  .meeting-summary {
-    margin-bottom: 8px;
-  }
-  .walks {
-    margin: 8px 0;
-    padding: 8px 0;
-  }
-  .calendar-section {
-    margin-top: 10px;
-  }
-  .hours-note {
-    margin-top: 4px;
-  }
-  .alternatives {
-    margin-top: 12px;
-  }
-  .alternative {
-    min-height: 32px;
-    padding: 5px 0;
-  }
-  .alternative > span:first-child > small {
-    display: none;
-  }
-  .alternative .alternative-times {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-  }
-  .shortlist-section {
-    margin-top: 8px;
-  }
-  .shortlist-toggle {
-    padding: 5px 0;
-  }
-  footer {
-    padding: 6px 0 8px;
+    font-size: 26px;
   }
 }
 @media (max-width: 900px) and (min-width: 761px) {
@@ -1201,19 +929,10 @@ footer a:hover {
     padding: 0 32px;
   }
   .workspace {
-    gap: 30px;
+    gap: 28px;
   }
   .results {
-    padding-left: 30px;
-  }
-  .walk-connector {
-    gap: 0;
-  }
-  .date-time-row {
-    gap: 10px;
-  }
-  .when-heading {
-    flex-wrap: wrap;
+    padding-left: 28px;
   }
 }
 @media (max-width: 760px) {
@@ -1222,51 +941,29 @@ footer a:hover {
     max-width: 540px;
   }
   .masthead {
-    height: 116px;
-  }
-  .wordmark {
-    font-size: 54px;
+    height: 80px;
   }
   .masthead-note {
     font-size: 8px;
     letter-spacing: 0.1em;
   }
   .page-intro {
-    padding: 29px 0 31px;
+    padding: 26px 0;
+    font-size: 26px;
+    letter-spacing: -0.7px;
   }
-  .page-intro h1 {
-    font-size: 29px;
-  }
-  .workspace {
-    grid-template-columns: 1fr;
-    gap: 35px;
-  }
-  .section-title {
-    padding: 16px 0 24px;
+  .workspace.has-results {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
   }
   .origins {
-    gap: 23px;
+    gap: 16px;
   }
   .location-input input {
     font-size: 16px;
   }
   .location-detail {
-    font-size: 10px;
-  }
-  .balance {
-    margin: 29px 0;
-  }
-  .balance-copy {
-    margin-top: 16px;
-  }
-  .when-heading {
-    gap: 8px;
-  }
-  .when-heading > label {
-    font-size: 12px;
-  }
-  .day-shortcuts {
-    font-size: 10px;
+    font-size: 9px;
   }
   .date-time-row {
     gap: 14px;
@@ -1276,66 +973,12 @@ footer a:hover {
     font-size: 14px;
     height: 36px;
   }
-  .primary {
-    font-size: 12px;
-    min-height: 48px;
-  }
-  .example-button {
-    font-size: 10px;
-  }
-  .empty-state {
-    min-height: 365px;
-    padding-top: 22px;
-  }
-  .meeting-diagram {
-    width: 245px;
-    margin-bottom: 17px;
-  }
-  .empty-state h3 {
-    font-size: 35px;
-  }
-  .results .section-title {
-    padding-bottom: 26px;
-  }
-  .results .meeting-summary {
-    margin-bottom: 22px;
+  .results {
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
   }
   .cafe-result h2 {
-    font-size: 33px;
-  }
-  .walks {
-    margin-top: 23px;
-  }
-  .walk-connector {
-    gap: 5px;
-  }
-  .walks strong {
-    font-size: 31px;
-  }
-  .walks p > span {
-    font-size: 10px;
-  }
-  .hours-row {
-    font-size: 11px;
-  }
-  .alternatives {
-    margin-top: 29px;
-  }
-  .alternative {
-    padding: 15px 0;
-  }
-  .alternative strong {
-    font-size: 12px;
-  }
-  .alternative small {
-    font-size: 10px;
-  }
-  .shortlist-section {
-    margin-top: 33px;
-  }
-  .shortlist-toggle > span:first-child {
-    display: grid;
-    gap: 5px;
+    font-size: 30px;
   }
   .shortlist-list {
     grid-template-columns: 1fr;
@@ -1346,24 +989,12 @@ footer a:hover {
   .shortlist-item strong {
     font-size: 11px;
   }
-  .shortlist-item small {
-    font-size: 10px;
-  }
+  .shortlist-item small,
   .shortlist-item a {
     font-size: 10px;
   }
   footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    padding-bottom: 28px;
-  }
-  .no-results {
-    min-height: 335px;
-    padding-top: 30px;
-  }
-  .empty-state.is-loading {
-    min-height: 350px;
+    font-size: 8px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

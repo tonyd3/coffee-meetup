@@ -150,3 +150,9 @@ Type checking, all 13 tests, formatting, and the production build passed. An ind
 Added SPRO at 201 Spear Street, bringing the whitelist to 34. It uses the East Cut's listed 7am opening and Tony's confirmed 6pm closing for weekday meetings. Unconfirmed weekend hours are excluded and labelled in the shortlist. This supersedes the hold noted above. The coordinate match is an ArcGIS PointAddress with score 100; sources and the provisional weekday schedule are documented in `docs/meeting-places-research.md`.
 
 Type checking, all 13 tests, formatting, and the production build passed. A targeted audit confirmed all 33 previous café records remain unchanged, unique IDs and alphabetical ordering, valid coordinates, all five weekday opening windows, exact 30-minute eligibility at 5:30pm, exclusion at 5:31pm and on weekends, and calendar events ending at 6pm.
+
+## Interface simplification — 19 October 2026
+
+The initial view is a centred form; the recommendation appears after a search. Removed the numbered section headings, origin letter badges, decorative empty diagram and walk connector, repeated slider labels, and duplicate hours link. Alternatives use an accessible native disclosure. The café list, weekday/weekend shortcuts, opening-hours sources, calendar formats, and all 34 café records remain available.
+
+Exercised the real browser flow with keyboard-selected Hayes Valley and Ferry Building origins, slider Home/End and arrow keys, the weekend shortcut, alternate café selection, the café list, and no-results recovery. Painted Leopard remains eligible at 4:30pm with a 30-minute warning and a Google Calendar event ending at 5pm; it drops out at 4:31pm. Type checking, all 13 existing tests, formatting, and the production build passed. Captured desktop and mobile before/after evidence using the same inputs and dates; the shorter mobile page changes the final scroll offset. No café or routing data changed.

@@ -19,9 +19,7 @@ export default function Home() {
         </div>
       </header>
       <main>
-        <div className="page-intro">
-          <h1>Let’s meet for coffee.</h1>
-        </div>
+        <h1 className="page-intro">Let’s meet for coffee.</h1>
         <Meetup initialDate={tomorrow} />
       </main>
       <footer>

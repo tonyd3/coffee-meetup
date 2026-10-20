@@ -54,11 +54,6 @@ export function CafeResult({
             <span>min walk</span>
           </p>
         </div>
-        <span className="walk-connector" aria-hidden="true">
-          <i />
-          ······<span>↔</span>······
-          <i />
-        </span>
         <div>
           <span className="eyebrow">THEM</span>
           <p>
@@ -75,11 +70,16 @@ export function CafeResult({
       <div className="hours-row">
         <span>
           <i className="open-dot" />
-          Open at {timeLabel(time)}
+          Open
         </span>
-        <span>
-          {timeLabel(hours.open)}–{timeLabel(hours.close)}
-        </span>
+        <a
+          href={result.cafe.source}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Check hours for ${result.cafe.name}`}
+        >
+          {timeLabel(hours.open)}–{timeLabel(hours.close)} ↗
+        </a>
       </div>
       <Reveal open={result.remaining < 60}>
         <p className="closing-warning">
@@ -115,11 +115,6 @@ export function CafeResult({
           </div>
         </Reveal>
       </div>
-      <p className="hours-note">
-        <a href={result.cafe.source} target="_blank" rel="noreferrer">
-          Check hours ↗
-        </a>
-      </p>
     </article>
   );
 }

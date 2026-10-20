@@ -161,15 +161,21 @@ export function Meetup({ initialDate }: { initialDate: string }) {
     date && time && meetingInstant(date, time).getTime() <= Date.now(),
   );
   const shown = routes && !inPast && !loading && date && time;
+  const hasResults = Boolean(routes && !inPast && date && time);
   const activeCount = cafes.length - excluded.length;
   return (
     <>
-      <div className="workspace">
-        <section className="plan" aria-labelledby="plan-title">
-          <div className="section-title">
-            <h2 id="plan-title">The plan</h2>
-            <span className="eyebrow">01</span>
-          </div>
+      <div className={`workspace${hasResults ? " has-results" : ""}`}>
+        <div className="sr-only" role="status" aria-live="polite">
+          {loading
+            ? "Finding walking routes."
+            : shown
+              ? matches.length
+                ? `${matches.length} ${matches.length === 1 ? "café" : "cafés"} available. ${selected.cafe.name} selected. ${selected.you} minutes for you, ${selected.them} for them.`
+                : "No cafés available for this meeting time."
+              : ""}
+        </div>
+        <section className="plan" aria-label="Meeting details">
           <form
             onSubmit={(event) => {
               event.preventDefault();
@@ -178,14 +184,12 @@ export function Meetup({ initialDate }: { initialDate: string }) {
           >
             <div className="origins">
               <LocationField
-                letter="A"
-                label="Your starting point"
+                label="You"
                 value={you}
                 onChange={(value) => changeOrigin("you", value)}
               />
               <LocationField
-                letter="B"
-                label="Their starting point"
+                label="Them"
                 value={them}
                 onChange={(value) => changeOrigin("them", value)}
               />
@@ -198,7 +202,10 @@ export function Meetup({ initialDate }: { initialDate: string }) {
               }}
             />
             <div className="when-heading">
-              <label htmlFor="meeting-date">When</label>
+              <div className="when-label">
+                <label htmlFor="meeting-date">When</label>
+                <span>SF time</span>
+              </div>
               <div className="day-shortcuts">
                 <button
                   type="button"
@@ -253,7 +260,6 @@ export function Meetup({ initialDate }: { initialDate: string }) {
                 />
               </div>
             </div>
-            <p className="time-hint">San Francisco time</p>
             <Reveal open={Boolean(error) || Boolean(routes && inPast)}>
               <p className="form-error" role="alert">
                 {error || "Choose a meeting time in the future."}
@@ -270,11 +276,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
               disabled={loading || activeCount === 0}
             >
               <span className={loading ? "loading-label" : ""}>
-                {loading
-                  ? "Finding your meeting spot…"
-                  : routes
-                    ? "Update walking routes"
-                    : "Find a place"}
+                {loading ? "Finding…" : "Find a place"}
               </span>
               <span aria-hidden="true">{loading ? "···" : "↗"}</span>
             </button>
@@ -292,26 +294,10 @@ export function Meetup({ initialDate }: { initialDate: string }) {
         <section
           className="results"
           ref={resultsRef}
-          aria-labelledby="results-title"
+          aria-label="Suggested café"
           aria-busy={loading}
+          hidden={!hasResults}
         >
-          <div className="section-title">
-            <h2 id="results-title">A good place</h2>
-            <span className="eyebrow">02</span>
-          </div>
-          <div
-            className="results-announcement sr-only"
-            role="status"
-            aria-live="polite"
-          >
-            {loading
-              ? "Finding walking routes."
-              : shown
-                ? matches.length
-                  ? `${matches.length} ${matches.length === 1 ? "café" : "cafés"} available. ${selected.cafe.name} selected. ${selected.you} minutes for you, ${selected.them} for them.`
-                  : "No cafés available for this meeting time."
-                : ""}
-          </div>
           <AnimatePresence initial={false} mode="wait">
             {shown && selected ? (
               <m.div
@@ -342,8 +328,8 @@ export function Meetup({ initialDate }: { initialDate: string }) {
                   </m.div>
                 </AnimatePresence>
                 {alternatives.length > 0 && (
-                  <div className="alternatives">
-                    <h3 className="eyebrow">OTHER OPTIONS</h3>
+                  <details className="alternatives">
+                    <summary aria-label="Other cafés">Other cafés</summary>
                     {alternatives.map((result) => (
                       <button
                         key={result.cafe.id}
@@ -366,7 +352,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
                         </span>
                       </button>
                     ))}
-                  </div>
+                  </details>
                 )}
               </m.div>
             ) : shown ? (
@@ -380,7 +366,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
                 <span className="empty-mark" aria-hidden="true">
                   ◷
                 </span>
-                <h3>No coffee at this hour.</h3>
+                <h2>No coffee at this hour.</h2>
                 <p>
                   {activeCount === 0
                     ? "Select a café in your shortlist below."
@@ -407,42 +393,16 @@ export function Meetup({ initialDate }: { initialDate: string }) {
                 </button>
               </m.div>
             ) : (
-              <m.div
-                key={loading ? "loading" : "empty"}
-                className={`empty-state${loading ? " is-loading" : ""}`}
+              <m.p
+                key="loading"
+                className="result-loading"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={change}
               >
-                <div className="meeting-diagram" aria-hidden="true">
-                  <svg viewBox="0 0 300 150" fill="none">
-                    <circle cx="90" cy="75" r="70" />
-                    <circle cx="210" cy="75" r="70" />
-                    <path d="M90 75h120" strokeDasharray="2 5" />
-                    <circle className="diagram-person" cx="90" cy="75" r="4" />
-                    <circle className="diagram-person" cx="210" cy="75" r="4" />
-                    <circle className="diagram-centre" cx="150" cy="75" r="6" />
-                    <text className="diagram-label" x="90" y="108">
-                      You
-                    </text>
-                    <text className="diagram-label" x="210" y="108">
-                      Them
-                    </text>
-                  </svg>
-                </div>
-                <h3>
-                  {loading ? (
-                    "Finding a place…"
-                  ) : (
-                    <>
-                      Somewhere
-                      <br />
-                      <em>between.</em>
-                    </>
-                  )}
-                </h3>
-              </m.div>
+                Finding a place…
+              </m.p>
             )}
           </AnimatePresence>
         </section>
@@ -456,7 +416,7 @@ export function Meetup({ initialDate }: { initialDate: string }) {
           onClick={() => setShortlistOpen(!shortlistOpen)}
         >
           <span>
-            <span id="shortlist-title">The café shortlist</span>
+            <span id="shortlist-title">Cafés</span>
             <small>
               {activeCount} {activeCount === 1 ? "place" : "places"}
             </small>
